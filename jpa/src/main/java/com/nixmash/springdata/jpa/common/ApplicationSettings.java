@@ -5,7 +5,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@PropertySource("file:/home/daveburke/web/nixmashspring/external.properties")
+@PropertySource("file:C:/DevLabs/FileRepo/Spring-NixMash/external.properties")
 @ConfigurationProperties(prefix = "external")
 public class ApplicationSettings {
 

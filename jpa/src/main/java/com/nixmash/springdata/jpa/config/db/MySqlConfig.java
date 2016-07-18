@@ -40,10 +40,10 @@ public class MySqlConfig extends JpaCommonConfig {
         return MySQL5InnoDBDialect.class;
     }
 
-    @Bean
-    public DatabasePopulator databasePopulator() {
-        return null;
-    }
+   // @Bean
+    // public DatabasePopulator databasePopulator() {
+        //return null;
+    //}
 
 }
 

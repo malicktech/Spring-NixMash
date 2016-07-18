@@ -45,6 +45,11 @@ public class H2Config extends JpaCommonConfig {
         return HSQLDialect.class;
     }
 
+    /**
+     * to populate, initialize a database
+     * @param dataSource
+     * @return
+     */
     @Bean
     public DatabasePopulator databasePopulator(DataSource dataSource) {
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();

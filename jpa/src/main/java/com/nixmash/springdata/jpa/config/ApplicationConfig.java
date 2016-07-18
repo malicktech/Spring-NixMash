@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @ComponentScan(basePackages = "com.nixmash.springdata.jpa")
 @EnableJpaRepositories(basePackages = "com.nixmash.springdata.jpa")
-@PropertySource("classpath:/META-INF/spring/application.properties")
+//@PropertySource("classpath:/META-INF/spring/application.properties")
 public class ApplicationConfig {
 
 

@@ -1,6 +1,8 @@
 #!/bin/bash 
 
 # ---------------------------------------------------------------------- */
+# SHELL SCRIPT
+#
 # Create path to NixMash Spring File Storage Path - 4/21/2016
 # 
 # -- Used to point to physical storage location from IDE Build folder
@@ -16,8 +18,12 @@
 
 # Set Variables ------------------------------------------------- */
 
-BUILDPATH="/ubuntuland/projects/nixmash-spring/mvc/build/classes/main/static"
-FILEPATH="/ubuntuland/sites/nixmashspring/files"
+# BUILDPATH="/ubuntuland/projects/nixmash-spring/mvc/build/classes/main/static"
+BUILDPATH="C:/DevLabs/Workspace-mars/Spring-NixMash/mvc/build/classes/main/static"
+
+# FILEPATH="/ubuntuland/sites/nixmashspring/files"
+FILEPATH="C:/DevLabs/FileRepo/Spring-NixMash/files"
+
 FILEPATHNAME="files"
 
 if [ "$1" != "" ]; then

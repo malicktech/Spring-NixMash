@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApplicationConfig.class)
 @Transactional
-@ActiveProfiles(DataConfigProfile.H2)
+@ActiveProfiles(DataConfigProfile.SPRING_PROFILE_H2)
 public class SiteServiceTests {
 
     private static final String SITE_PROPERTY_NAME = "siteName";

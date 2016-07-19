@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApplicationConfig.class)
-@ActiveProfiles(DataConfigProfile.H2)
+@ActiveProfiles(DataConfigProfile.SPRING_PROFILE_H2)
 public class PostRepoTests {
 
     @Autowired

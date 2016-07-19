@@ -19,7 +19,7 @@ import com.nixmash.springdata.jpa.enums.DataConfigProfile;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApplicationConfig.class)
 @Transactional
-@ActiveProfiles(DataConfigProfile.H2)
+@ActiveProfiles(DataConfigProfile.SPRING_PROFILE_H2)
 public class ContactTests {
 
 	private static final String EMAIL = "foo.bar@bar.com";

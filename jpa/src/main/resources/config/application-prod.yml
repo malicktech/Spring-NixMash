@@ -1,0 +1,11 @@
+# ===================================================================
+# Spring Boot configuration for the "production" profile.
+#
+# This configuration overrides the application.yml file.
+# ===================================================================
+
+spring:
+    profiles:
+        include: mysql
+
+

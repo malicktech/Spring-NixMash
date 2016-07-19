@@ -1,0 +1,42 @@
+# ===================================================================
+# Spring Boot configuration for the "h2" profile.
+#
+# ===================================================================
+
+# ===================================================================
+# Spring Boot configuration for the "dev" profile.
+#
+# This configuration overrides the application.yml file.
+# ===================================================================
+
+spring:
+    datasource:
+        url: jdbc:h2:mem:mixtashSampleapplication;DB_CLOSE_DELAY=-1
+        driver-class-name: org.h2.Driver
+        username: mixtashSampleapplication
+        password:
+
+    h2:
+        console:
+            enabled: false
+    jpa:
+        database: H2
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+            ddl-auto: create # DDL mode (none, validate, update, create, create-drop), shortcut for the "hibernate.hbm2ddl.auto" property.
+        properties:
+            hibernate:
+                #dialect: org.hibernate.dialect.H2Dialect
+                connection.charSet: UTF-8
+                hbm2ddl.import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+
+
+
+# ===================================================================
+# Hibernate HBM2DDL Setting
+# ===================================================================
+# "create"      - to build a new database on each run;
+# "update"      - to modify an existing database;
+# "create-drop" - means the same as "create" but also drops tables when Hibernate closes;
+# "validate"    - makes no changes to the database
+# ===================================================================

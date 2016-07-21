@@ -1,4 +1,12 @@
-war { baseName = 'nixmashSpring' }
+war {
+	baseName = 'nixmashSpring'
+	version =  '0.0.1'
+
+    /*   to exclude from a 'war' archive
+   Any exclude specified on the rootSpec will automatically apply files copied into the war file, including 'WEB-INF'.*/
+    rootSpec.exclude("**/tomcat-*.jar")
+
+}
 
 sourceSets {
 	main {
@@ -11,10 +19,12 @@ sourceSets {
 configurations { providedRuntime }
 
 dependencies {
+
 	compile project(':jpa')
 	compile project(':solr')
 	compile project(':mail')
 	compile project(':jsoup')
+
 	compile 'org.springframework.boot:spring-boot-starter-web'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
@@ -23,7 +33,7 @@ dependencies {
 	compile 'org.springframework.social:spring-social-security:1.1.4.RELEASE'
 	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	compile 'org.springframework.social:spring-social-google:1.0.0.RELEASE'
-	
+
 	compile 'com.jayway.restassured:json-path:2.4.1'
 	compile 'com.jayway.jsonpath:json-path-assert:2.0.0'
 
@@ -50,11 +60,21 @@ dependencies {
 	testCompile project(':mail').sourceSets.test.output
 }
 
+/* http://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-gradle-plugin.html
+To run a project in place without building a jar first you can use the “bootRun” task
+
+
+*/
 bootRun {
-	systemProperty 'server.port', '9000'
-	systemProperty 'spring.profiles.active', 'mysql,dev'
+    // True Making static classpath resources reloadable means that using bootRun, your application will use the resources in their unprocessed form.
+    addResources = false
+    // 1Sst in PropertySource Command line arguments used by spriggBoot
+    systemProperty 'server.port', '9000'
+	systemProperty 'spring.profiles.active', 'dev, mysql'
 	args "--appurl=http://localhost:9000"
 	main = 'com.nixmash.springdata.mvc.common.Application'
+
+
 }
 
 

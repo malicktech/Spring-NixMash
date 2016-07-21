@@ -1,15 +1,23 @@
 
 
 buildscript {
-	ext { springBootVersion = '1.3.5.RELEASE' }
+	ext { springBootVersion = '1.3.6.RELEASE' }
 	repositories {
+		mavenLocal()
 		mavenCentral()
+        jcenter()
+		maven { url 'http://repo.spring.io/plugins-release' }
+        maven { url 'http://repo.spring.io/milestone' }
+		maven { url 'http://repo.spring.io/snapshot' }
 		maven { url "http://maven.restlet.org" }
+        maven { url "https://plugins.gradle.org/m2/" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath 'org.springframework:springloaded:1.2.0.RELEASE'
-	}
+		classpath 'org.springframework:springloaded:1.2.6.RELEASE'
+		classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE"
+    }
 }
 
 allprojects {
@@ -20,28 +28,87 @@ allprojects {
 	apply plugin: 'spring-boot'
 	apply plugin: 'java'
 	apply plugin: 'war'
+	apply plugin: 'propdeps'
+	defaultTasks 'bootRun'
 	sourceCompatibility = 1.8
 	targetCompatibility = 1.8
 
 	repositories {
+        mavenLocal()
 		mavenCentral()
+		maven { url 'http://repo.spring.io/milestone' }
+		maven { url 'http://repo.spring.io/snapshot' }
 		maven { url "http://maven.restlet.org" }
-	}
+        maven { url 'http://repo.maven.apache.org/maven2' }
+    }
 
 	configurations {
 		all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
 	}
 
 	dependencies {
-		compile 'org.springframework.boot:spring-boot-actuator'
-		compile 'org.springframework.boot:spring-boot-devtools'
-		compile 'org.springframework.boot:spring-boot-autoconfigure'
-		optional 'org.springframework.boot:spring-boot-configuration-processor'
 
+        // METRICS
+        compile "io.dropwizard.metrics:metrics-core"
+        compile "io.dropwizard.metrics:metrics-annotation:${dropwizard_metrics_version}"
+        compile "io.dropwizard.metrics:metrics-ehcache:${dropwizard_metrics_version}"
+        compile "io.dropwizard.metrics:metrics-graphite:${dropwizard_metrics_version}"
+        compile "io.dropwizard.metrics:metrics-healthchecks:${dropwizard_metrics_version}"
+        compile "io.dropwizard.metrics:metrics-jvm:${dropwizard_metrics_version}"
+        compile "io.dropwizard.metrics:metrics-servlet:${dropwizard_metrics_version}"
+        compile "io.dropwizard.metrics:metrics-json:${dropwizard_metrics_version}"
+        compile ("io.dropwizard.metrics:metrics-servlets:${dropwizard_metrics_version}") {
+            exclude(module: 'metrics-healthchecks')
+        }
+        compile ("com.ryantenney.metrics:metrics-spring:${metrics_spring_version}") {
+            exclude(module: 'metrics-core')
+            exclude(module: 'metrics-healthchecks')
+        }
+        compile("net.logstash.logback:logstash-logback-encoder:${logstash_logback_encoder_version}") {
+            exclude(module: 'ch.qos.logback')
+        }
+        compile "fr.ippon.spark.metrics:metrics-spark-reporter:${metrics_spark_reporter_version}"
+
+        // production-quality connection pool
+        compile("com.zaxxer:HikariCP:${HikariCP_version}") {
+            exclude(module: 'tools')
+        }
+
+        // Hibernate second-level cache
+        compile ("org.hibernate:hibernate-ehcache") {
+            exclude(module: 'ehcache-core')
+        }
+        // auditing/versioning of persistent classes
+        compile "org.hibernate:hibernate-envers"
+        //  allows to express and validate application constraints
+        compile "org.hibernate:hibernate-validator"
+
+        // Spring
+		compile 'org.springframework.boot:spring-boot-actuator'
+		compile 'org.springframework.boot:spring-boot-autoconfigure'
+        compile 'org.springframework.boot:spring-boot-devtools'
+        // Tools for generating executable JAR/WAR files
+        compile "org.springframework.boot:spring-boot-loader-tools"
+        optional "org.springframework.boot:spring-boot-configuration-processor"
+
+        compile "org.springframework.boot:spring-boot-starter-logging"
+        compile "org.springframework.boot:spring-boot-starter-aop"
+
+        // Spring
 		compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 		compile 'org.springframework.boot:spring-boot-starter-security'
 		compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 		compile 'org.springframework.security:spring-security-test:4.1.0.RELEASE'
+
+        compile ("org.springframework:spring-context-support") {
+            exclude(module: 'quartz')
+        }
+
+        // Common Utils
+        compile "commons-lang:commons-lang:${commons_lang_version}"
+        compile "commons-io:commons-io:${commons_io_version}"
+        compile "javax.inject:javax.inject:${javax_inject_version}"
+
 		compile 'org.hibernate:hibernate-core'
 		compile 'javax.servlet:javax.servlet-api'
 		compile 'org.javassist:javassist'
@@ -59,14 +126,20 @@ allprojects {
 		
 		runtime('com.h2database:h2')
 		runtime('mysql:mysql-connector-java')
-		
+
 		testCompile 'org.springframework.boot:spring-boot-starter-test'
-		testCompile 'junit:junit:4.12'
+        testCompile "org.assertj:assertj-core:${assertj_core_version}"
+        testCompile 'junit:junit'
 		testCompile "org.mockito:mockito-core"
 		testCompile "org.hamcrest:hamcrest-library"
-
-		compile ('ch.qos.logback:logback-classic:1.1.7') { exclude(module:'slf4j-api') }
 	}
+
+
+
+	bootRepackage {
+		mainClass = 'com.nixmash.springdata.mvc.common.Application'
+	}
+
 
 	springBoot {
 		mainClass = 'com.nixmash.springdata.mvc.common.Application'
@@ -76,6 +149,7 @@ allprojects {
 		println gradle.gradleHomeDir
 	}
 
+    // http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#howto-reload-springloaded-gradle-and-intellij-idea
 	idea {
 		module {
 			inheritOutputDirs = false
@@ -83,7 +157,15 @@ allprojects {
 		}
 	}
 
-	task wrapper(type: Wrapper) { gradleVersion = '2.12' }
+    task cleanResources(type: Delete) {
+        delete 'build/resources'
+    }
+
+	task wrapper(type: Wrapper) { gradleVersion = '2.14' }
+	
+	task stage(dependsOn: 'bootRepackage') {
+	}
+
 
 	eclipse {
 		classpath {
@@ -91,5 +173,8 @@ allprojects {
 			containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
 		}
 	}
+
+    compileJava.dependsOn processResources
+    processResources.dependsOn cleanResources
 	
 }

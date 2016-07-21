@@ -20,6 +20,7 @@ configurations {
 
 springBoot {
     mainClass = 'com.nixmash.springdata.jpa.JpaLauncher'
+    executable = true
 }
 
 dependencies {

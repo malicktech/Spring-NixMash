@@ -1,8 +1,17 @@
-<configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
     <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
+
+    <root level="#logback.loglevel#">
+        <appender-ref ref="CONSOLE"/>
+    </root>
 
     <!-- To enable JMX Management -->
     <jmxConfigurator/>
@@ -14,6 +23,7 @@
     </appender>
 
     <logger name="com.nixmash.springdata" level="info"/>
+
     <logger name="org.thymeleaf" level="off"/>
     <logger name="org.hibernate" level="off"/>
 

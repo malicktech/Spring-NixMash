@@ -29,9 +29,9 @@ public interface UserService {
 
     List<User> getUsersWithDetail();
 
-	boolean canAccessUser(CurrentUser currentUser, String username);
+    boolean canAccessUser(CurrentUser currentUser, String username);
 
-	UserConnection getUserConnectionByUserId(String userId);
+    UserConnection getUserConnectionByUserId(String userId);
 
     User update(UserDTO userDTO);
 

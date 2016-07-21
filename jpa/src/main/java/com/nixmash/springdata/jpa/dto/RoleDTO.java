@@ -46,9 +46,9 @@ public class RoleDTO {
     @Override
     public String toString() {
         return "RoleDTO{" +
-                "id=" + id +
-                ", isLocked=" + isLocked +
-                ", authority='" + authority + '\'' +
-                '}';
+            "id=" + id +
+            ", isLocked=" + isLocked +
+            ", authority='" + authority + '\'' +
+            '}';
     }
 }

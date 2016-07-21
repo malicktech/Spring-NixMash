@@ -57,19 +57,19 @@ public class JpaUI {
     }
 
     private void displayRandomUserIdString() {
-        System.out.println(RandomStringUtils.randomAlphanumeric(16));
+        System.out.println("JpaUI displayRandomUserIdString :: " + RandomStringUtils.randomAlphanumeric(16));
     }
 
     private void addPostDemo() throws DuplicatePostNameException {
         String title = "Best way to create SEO friendly URI string";
         PostDTO postDTO = PostDTO.getBuilder(
-                1L,
-                title,
-                PostUtils.createSlug(title),
-                "http://nixmash.com/java/variations-on-json-key-value-pairs-in-spring-mvc/",
-                "This is the post content",
-                PostType.LINK,
-                PostDisplayType.LINK_FEATURE
+            1L,
+            title,
+            PostUtils.createSlug(title),
+            "http://nixmash.com/java/variations-on-json-key-value-pairs-in-spring-mvc/",
+            "This is the post content",
+            PostType.LINK,
+            PostDisplayType.LINK_FEATURE
         ).build();
         postService.add(postDTO);
     }
@@ -78,7 +78,7 @@ public class JpaUI {
 
     private void siteOptionsDemo() {
         System.out.println("Initialized SiteOptions Bean Property: " +
-                siteOptions.getGoogleAnalyticsTrackingId());
+            siteOptions.getGoogleAnalyticsTrackingId());
 
         String siteName = reset ? "My Site" : "My Updated Site Name";
         String integerProperty = reset ? "1" : "8";
@@ -99,28 +99,28 @@ public class JpaUI {
         ContactUtils.listUserConnection("My User Connection", userConnection);
         ContactUtils.listUsersWithDetail(userService.getUsersByAuthorityId(1L));
         ContactUtils.listUser("USER BY EMAIL",
-                userService.getByEmail("user@aol.com").get());
+            userService.getByEmail("user@aol.com").get());
         try {
             ContactUtils.listContact("CONTACT BY EMAIL",
-                    contactService.findContactById(1L));
+                contactService.findContactById(1L));
         } catch (ContactNotFoundException e) {
             e.printStackTrace();
         }
 
         ContactUtils.listContacts("ENTITIES FIND ALL", contactService.findAll());
         ContactUtils.listContacts("ENTITIES FIND BY FIRST NAME",
-                contactService.findByFirstName("Barry"));
+            contactService.findByFirstName("Barry"));
         ContactUtils.listContacts("ENTITIES FIND BY FIRST AND LAST NAME",
-                contactService.findByFirstNameAndLastName("Tad", "Grant"));
+            contactService.findByFirstNameAndLastName("Tad", "Grant"));
 
         ContactUtils.listContact("SINGLE CONTACT: ",
-                contactService.getContactByEmail("Nam.nulla@pedenonummyut.edu"));
+            contactService.getContactByEmail("Nam.nulla@pedenonummyut.edu"));
         ContactUtils.listContactsWithDetail(contactService.getContactsWithDetail());
 
         ContactUtils.listContactWithDetail(contactService.getContactByIdWithDetail(2L));
 
         ContactUtils.listContacts("FIND BY FIRST NAME",
-                contactService.findByFirstName("Summer"));
+            contactService.findByFirstName("Summer"));
 
         ContactUtils.listContactWithDetail(contactService.getContactByIdWithDetail(1L));
         ContactUtils.contactToContactDTO(contactService.getContactByIdWithDetail(2L));

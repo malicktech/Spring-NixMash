@@ -19,5 +19,15 @@ public final class DataConfigProfile {
     public static final String SPRING_PROFILE_H2 = "h2";
     public static final String SPRING_PROFILE_POSTGRESQL = "postgres";
     public static final String SPRING_PROFILE_MYSQL = "mysql";
+
+    // Spring profile used when deploying with Spring Cloud (used when deploying to CloudFoundry)
+    public static final String SPRING_PROFILE_CLOUD = "cloud";
+    // Spring profile used when deploying to Heroku
+    public static final String SPRING_PROFILE_HEROKU = "heroku";
+
+    // Spring profile used to disable swagger
+    public static final String SPRING_PROFILE_NO_SWAGGER = "no-swagger";
+
+
 }
 

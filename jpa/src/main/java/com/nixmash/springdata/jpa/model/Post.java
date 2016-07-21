@@ -90,12 +90,12 @@ public class Post implements Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "post_tag_ids",
-            joinColumns = @JoinColumn(name = "post_id",
-                    referencedColumnName = "post_id",
-                    nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "tag_id",
-                    referencedColumnName = "tag_id",
-                    nullable = false))
+        joinColumns = @JoinColumn(name = "post_id",
+            referencedColumnName = "post_id",
+            nullable = false),
+        inverseJoinColumns = @JoinColumn(name = "tag_id",
+            referencedColumnName = "tag_id",
+            nullable = false))
     public Set<Tag> tags;
 
     // endregion
@@ -283,23 +283,23 @@ public class Post implements Serializable {
     @Override
     public String toString() {
         return "Post{" +
-                "postId=" + postId +
-                ", userId=" + userId +
-                ", postTitle='" + postTitle + '\'' +
-                ", postName='" + postName + '\'' +
-                ", postLink='" + postLink + '\'' +
-                ", postDate=" + postDate +
-                ", postModified=" + postModified +
-                ", postType='" + postType + '\'' +
-                ", displayType='" + displayType + '\'' +
-                ", isPublished=" + isPublished +
-                ", postContent='" + postContent + '\'' +
-                ", postSource='" + postSource + '\'' +
-                ", clickCount=" + clickCount +
-                ", likesCount=" + likesCount +
-                ", valueRating=" + valueRating +
-                ", version=" + version +
-                '}';
+            "postId=" + postId +
+            ", userId=" + userId +
+            ", postTitle='" + postTitle + '\'' +
+            ", postName='" + postName + '\'' +
+            ", postLink='" + postLink + '\'' +
+            ", postDate=" + postDate +
+            ", postModified=" + postModified +
+            ", postType='" + postType + '\'' +
+            ", displayType='" + displayType + '\'' +
+            ", isPublished=" + isPublished +
+            ", postContent='" + postContent + '\'' +
+            ", postSource='" + postSource + '\'' +
+            ", clickCount=" + clickCount +
+            ", likesCount=" + likesCount +
+            ", valueRating=" + valueRating +
+            ", version=" + version +
+            '}';
     }
 
     public static Builder getBuilder(Long userId, String postTitle, String postName, String postLink, String postContent, PostType postType, PostDisplayType displayType) {

@@ -31,30 +31,30 @@ public class PostUtils {
     public static Post postDtoToPost(PostDTO dto) {
 
         return Post.getBuilder(dto.getUserId(),
-                dto.getPostTitle(),
-                dto.getPostName(),
-                dto.getPostLink(),
-                dto.getPostContent(),
-                dto.getPostType(),
-                dto.getDisplayType())
-                .postSource(dto.getPostSource())
-                .postImage(dto.getPostImage())
-                .build();
+            dto.getPostTitle(),
+            dto.getPostName(),
+            dto.getPostLink(),
+            dto.getPostContent(),
+            dto.getPostType(),
+            dto.getDisplayType())
+            .postSource(dto.getPostSource())
+            .postImage(dto.getPostImage())
+            .build();
     }
 
     public static PostDTO postToPostDTO(Post post) {
 
         return PostDTO.getBuilder(post.getUserId(),
-                post.getPostTitle(),
-                post.getPostName(),
-                post.getPostLink(),
-                post.getPostContent(),
-                post.getPostType(),
-                post.getDisplayType())
-                .postSource(post.getPostSource())
-                .postImage(post.getPostImage())
-                .postId(post.getPostId())
-                .build();
+            post.getPostTitle(),
+            post.getPostName(),
+            post.getPostLink(),
+            post.getPostContent(),
+            post.getPostType(),
+            post.getDisplayType())
+            .postSource(post.getPostSource())
+            .postImage(post.getPostImage())
+            .postId(post.getPostId())
+            .build();
     }
 
     public static String createPostSource(String url) {
@@ -115,8 +115,8 @@ public class PostUtils {
             case NIXMASH_POST:
                 content = StringUtils.appendIfMissing(content, feature);
                 String nixMashHtml = "<div class=\"nixmash-tag\">" +
-                        "<a href=\"http://nixmash.com\" target=\"_blank\">\n" +
-                        "<img src=\"/images/posts/nixmashtag.png\" alt=\"\"/></a></div>";
+                    "<a href=\"http://nixmash.com\" target=\"_blank\">\n" +
+                    "<img src=\"/images/posts/nixmashtag.png\" alt=\"\"/></a></div>";
                 content = StringUtils.appendIfMissing(content, nixMashHtml);
                 break;
             case LINK:

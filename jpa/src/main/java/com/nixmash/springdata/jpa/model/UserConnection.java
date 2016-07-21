@@ -14,126 +14,125 @@ import org.springframework.social.connect.ConnectionData;
 @Table(name = "userconnection")
 public class UserConnection implements Serializable {
 
-	private static final long serialVersionUID = -6513324326814304874L;
+    private static final long serialVersionUID = -6513324326814304874L;
 
-	public UserConnection() {
-	}
-	
-	@Id
-	@Column(name = "userid", unique = true, nullable = false)
-	private String userId;
+    public UserConnection() {
+    }
 
-	@Column(name = "providerid")
-	@NotEmpty
-	private String providerId;
+    @Id
+    @Column(name = "userid", unique = true, nullable = false)
+    private String userId;
 
-	@Column(name = "provideruserid")
-	@NotEmpty
-	private String providerUserId;
+    @Column(name = "providerid")
+    @NotEmpty
+    private String providerId;
 
-	@Column(name = "rank")
-	private int rank;
+    @Column(name = "provideruserid")
+    @NotEmpty
+    private String providerUserId;
 
-	@Column(name = "displayname")
-	private String displayName;
+    @Column(name = "rank")
+    private int rank;
 
-	@Column(name = "profileurl")
-	private String profileUrl;
+    @Column(name = "displayname")
+    private String displayName;
 
-	@Column(name = "imageurl")
-	private String imageUrl;
+    @Column(name = "profileurl")
+    private String profileUrl;
 
-	@Column(name = "accesstoken")
-	private String accessToken;
+    @Column(name = "imageurl")
+    private String imageUrl;
 
-	@Column(name = "secret")
-	private String secret;
+    @Column(name = "accesstoken")
+    private String accessToken;
 
-	@Column(name = "refreshtoken")
-	private String refreshToken;
+    @Column(name = "secret")
+    private String secret;
 
-	@Column(name = "expiretime")
-	private Long expireTime;
+    @Column(name = "refreshtoken")
+    private String refreshToken;
 
-	public UserConnection(String userId, String providerId, String providerUserId, int rank, String displayName,
-			String profileUrl, String imageUrl, String accessToken, String secret, String refreshToken,
-			Long expireTime) {
-		this.userId = userId;
-		this.providerId = providerId;
-		this.providerUserId = providerUserId;
-		this.rank = rank;
-		this.displayName = displayName;
-		this.profileUrl = profileUrl;
-		this.imageUrl = imageUrl;
-		this.accessToken = accessToken;
-		this.secret = secret;
-		this.refreshToken = refreshToken;
-		this.expireTime = expireTime;
-	}
+    @Column(name = "expiretime")
+    private Long expireTime;
 
-	public UserConnection(ConnectionData connectionData, String userId)
-	{
-		this.userId = userId;
-		this.providerId = connectionData.getProviderId();
-		this.providerUserId = connectionData.getProviderUserId();
-		this.rank = 1;
-		this.displayName = connectionData.getDisplayName();
-		this.profileUrl = connectionData.getProfileUrl();
-		this.imageUrl = connectionData.getImageUrl();
-		this.accessToken = connectionData.getAccessToken();
-		this.secret = connectionData.getSecret();
-		this.refreshToken = connectionData.getRefreshToken();
-		this.expireTime = connectionData.getExpireTime();
-	}
-	
-	public String toString() {
-		return "userId = " + userId + ", providerId = " + providerId + ", providerUserId = " + providerUserId
-				+ ", rank = " + rank + ", displayName = " + displayName + ", profileUrl = " + profileUrl
-				+ ", imageUrl = " + imageUrl + ", accessToken = " + accessToken + ", secret = " + secret
-				+ ", refreshToken = " + refreshToken + ", expireTime = " + expireTime;
-	}
+    public UserConnection(String userId, String providerId, String providerUserId, int rank, String displayName,
+                          String profileUrl, String imageUrl, String accessToken, String secret, String refreshToken,
+                          Long expireTime) {
+        this.userId = userId;
+        this.providerId = providerId;
+        this.providerUserId = providerUserId;
+        this.rank = rank;
+        this.displayName = displayName;
+        this.profileUrl = profileUrl;
+        this.imageUrl = imageUrl;
+        this.accessToken = accessToken;
+        this.secret = secret;
+        this.refreshToken = refreshToken;
+        this.expireTime = expireTime;
+    }
 
-	public String getUserId() {
-		return userId;
-	}
+    public UserConnection(ConnectionData connectionData, String userId) {
+        this.userId = userId;
+        this.providerId = connectionData.getProviderId();
+        this.providerUserId = connectionData.getProviderUserId();
+        this.rank = 1;
+        this.displayName = connectionData.getDisplayName();
+        this.profileUrl = connectionData.getProfileUrl();
+        this.imageUrl = connectionData.getImageUrl();
+        this.accessToken = connectionData.getAccessToken();
+        this.secret = connectionData.getSecret();
+        this.refreshToken = connectionData.getRefreshToken();
+        this.expireTime = connectionData.getExpireTime();
+    }
 
-	public String getProviderId() {
-		return providerId;
-	}
+    public String toString() {
+        return "userId = " + userId + ", providerId = " + providerId + ", providerUserId = " + providerUserId
+            + ", rank = " + rank + ", displayName = " + displayName + ", profileUrl = " + profileUrl
+            + ", imageUrl = " + imageUrl + ", accessToken = " + accessToken + ", secret = " + secret
+            + ", refreshToken = " + refreshToken + ", expireTime = " + expireTime;
+    }
 
-	public String getProviderUserId() {
-		return providerUserId;
-	}
+    public String getUserId() {
+        return userId;
+    }
 
-	public int getRank() {
-		return rank;
-	}
+    public String getProviderId() {
+        return providerId;
+    }
 
-	public String getDisplayName() {
-		return displayName;
-	}
+    public String getProviderUserId() {
+        return providerUserId;
+    }
 
-	public String getProfileUrl() {
-		return profileUrl;
-	}
+    public int getRank() {
+        return rank;
+    }
 
-	public String getImageUrl() {
-		return imageUrl;
-	}
+    public String getDisplayName() {
+        return displayName;
+    }
 
-	public String getAccessToken() {
-		return accessToken;
-	}
+    public String getProfileUrl() {
+        return profileUrl;
+    }
 
-	public String getSecret() {
-		return secret;
-	}
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
-	public String getRefreshToken() {
-		return refreshToken;
-	}
+    public String getAccessToken() {
+        return accessToken;
+    }
 
-	public Long getExpireTime() {
-		return expireTime;
-	}
+    public String getSecret() {
+        return secret;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public Long getExpireTime() {
+        return expireTime;
+    }
 }

@@ -9,12 +9,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * This component returns the username of the authenticated user.
- *
+ * <p>
  * From Petri Kainulainen's JPA Examples Project on GitHub
- *
+ * <p>
  * spring-data-jpa-examples/query-methods/
  * https://goo.gl/lY7sT5
- *
  */
 public class UsernameAuditorAware implements AuditorAware<String> {
 
@@ -27,8 +26,7 @@ public class UsernameAuditorAware implements AuditorAware<String> {
         logger.debug("Getting the username of authenticated user.");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication == null)
-        {
+        if (authentication == null) {
             // in testing mode, return admin
             return TESTGUY_USERNAME;
         }

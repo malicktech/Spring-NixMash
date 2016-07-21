@@ -20,7 +20,8 @@ public class HobbyDTO {
 
     private Boolean isUserHobby = false;
 
-    public HobbyDTO() {}
+    public HobbyDTO() {
+    }
 
     public HobbyDTO(String hobbyTitle) {
         this.hobbyTitle = hobbyTitle;
@@ -63,9 +64,9 @@ public class HobbyDTO {
     @Override
     public String toString() {
         return "HobbyDTO{" +
-                "hobbyId=" + hobbyId +
-                ", hobbyTitle='" + hobbyTitle + '\'' +
-                ", isUserHobby=" + isUserHobby +
-                '}';
+            "hobbyId=" + hobbyId +
+            ", hobbyTitle='" + hobbyTitle + '\'' +
+            ", isUserHobby=" + isUserHobby +
+            '}';
     }
 }

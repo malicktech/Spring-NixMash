@@ -75,16 +75,16 @@ public class Contact implements Serializable {
     @Column(name = "created_by_user", nullable = false)
     @CreatedBy
     private String createdByUser;
-    
+
     @Column(name = "creation_time", nullable = false)
     @Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentLocalDateTime")
     @CreatedDate
     private ZonedDateTime creationTime;
-    
+
     @Column(name = "modified_by_user", nullable = false)
     @LastModifiedBy
     private String modifiedByUser;
-    
+
     @Column(name = "modification_time")
     @Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentLocalDateTime")
     @LastModifiedDate
@@ -92,7 +92,7 @@ public class Contact implements Serializable {
 
     @Basic
     @Column(name = "first_name", nullable = false, insertable = true, updatable = true,
-            length = MAX_LENGTH_FIRST_NAME)
+        length = MAX_LENGTH_FIRST_NAME)
     @NotEmpty
     public String getFirstName() {
         return firstName;
@@ -104,7 +104,7 @@ public class Contact implements Serializable {
 
     @Basic
     @Column(name = "last_name", nullable = false, insertable = true, updatable = true,
-            length = MAX_LENGTH_LAST_NAME)
+        length = MAX_LENGTH_LAST_NAME)
     @NotEmpty
     public String getLastName() {
         return lastName;
@@ -116,11 +116,12 @@ public class Contact implements Serializable {
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "MM/dd/yyyy")
-    @NotNull @Past
+    @NotNull
+    @Past
     @Column(name = "birth_date",
-            nullable = true,
-            insertable = true,
-            updatable = true)
+        nullable = true,
+        insertable = true,
+        updatable = true)
     public Date getBirthDate() {
         return birthDate;
     }
@@ -199,12 +200,12 @@ public class Contact implements Serializable {
 
     @ManyToMany
     @JoinTable(name = "contact_hobby_ids",
-            joinColumns = @JoinColumn(name = "contact_id",
-                    referencedColumnName = "contact_id",
-                    nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "hobby_id",
-                    referencedColumnName = "hobby_id",
-                    nullable = false))
+        joinColumns = @JoinColumn(name = "contact_id",
+            referencedColumnName = "contact_id",
+            nullable = false),
+        inverseJoinColumns = @JoinColumn(name = "hobby_id",
+            referencedColumnName = "hobby_id",
+            nullable = false))
     public Set<Hobby> getHobbies() {
         return hobbies;
     }
@@ -216,17 +217,17 @@ public class Contact implements Serializable {
     @Override
     public String toString() {
         return new ToStringCreator(this)
-                .append("id", this.getContactId())
-                .append("new", this.isNew())
-                .append("lastName", this.getLastName())
-                .append("firstName", this.getFirstName())
-                .append("email", this.getEmail())
-                .append("birthDate", this.getBirthDate())
-                .append("createdByUser", this.getCreatedByUser())
-                .append("creationTime", this.getCreationTime())
-                .append("modifiedByUser", this.getModifiedByUser())
-                .append("modificationTime", this.getModificationTime())
-                .toString();
+            .append("id", this.getContactId())
+            .append("new", this.isNew())
+            .append("lastName", this.getLastName())
+            .append("firstName", this.getFirstName())
+            .append("email", this.getEmail())
+            .append("birthDate", this.getBirthDate())
+            .append("createdByUser", this.getCreatedByUser())
+            .append("creationTime", this.getCreationTime())
+            .append("modifiedByUser", this.getModifiedByUser())
+            .append("modificationTime", this.getModificationTime())
+            .toString();
     }
 
     public void update(final String firstName, final String lastName, final String emailAddress, Date birthDate) {

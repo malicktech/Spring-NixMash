@@ -13,15 +13,15 @@ public class JpaLoader implements CommandLineRunner {
     private static final Logger logger = LoggerFactory.getLogger(JpaLoader.class);
 
     @Autowired
-    Environment environment;
+    Environment env;
 
     @Override
     public void run(String... args) throws Exception {
 
-        String activeProfile = environment.getActiveProfiles()[0];
+        String activeProfile = env.getActiveProfiles()[0];
         logger.info(String.format("Current JPA Active Profile: %s", activeProfile));
 
-        String applicationVersion = environment.getProperty("nixmash.spring.jpa.version");
+        String applicationVersion = env.getProperty("mintster.nixmash.spring.jpa.version");
         logger.info(String.format("NixMash Spring JPA Application Version: %s", applicationVersion));
 
     }

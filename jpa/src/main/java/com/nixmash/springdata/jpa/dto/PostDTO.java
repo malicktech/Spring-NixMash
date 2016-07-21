@@ -22,10 +22,10 @@ public class PostDTO implements Serializable {
     private Long userId;
 
     @NotEmpty
-    private Set<TagDTO> tags =new HashSet<TagDTO>();
+    private Set<TagDTO> tags = new HashSet<TagDTO>();
 
     @NotEmpty
-    @Length(max= Post.MAX_POST_TITLE_LENGTH)
+    @Length(max = Post.MAX_POST_TITLE_LENGTH)
     private String postTitle;
 
     @NotEmpty
@@ -236,23 +236,23 @@ public class PostDTO implements Serializable {
     @Override
     public String toString() {
         return "Post{" +
-                "postId=" + postId +
-                ", userId=" + userId +
-                ", postTitle='" + postTitle + '\'' +
-                ", postName='" + postName + '\'' +
-                ", postLink='" + postLink + '\'' +
-                ", postDate=" + postDate +
-                ", postModified=" + postModified +
-                ", postType='" + postType + '\'' +
-                ", displayType='" + displayType + '\'' +
-                ", isPublished=" + isPublished +
-                ", postContent='" + postContent + '\'' +
-                ", postSource='" + postSource + '\'' +
-                ", clickCount=" + clickCount +
-                ", likesCount=" + likesCount +
-                ", valueRating=" + valueRating +
-                ", version=" + version +
-                '}';
+            "postId=" + postId +
+            ", userId=" + userId +
+            ", postTitle='" + postTitle + '\'' +
+            ", postName='" + postName + '\'' +
+            ", postLink='" + postLink + '\'' +
+            ", postDate=" + postDate +
+            ", postModified=" + postModified +
+            ", postType='" + postType + '\'' +
+            ", displayType='" + displayType + '\'' +
+            ", isPublished=" + isPublished +
+            ", postContent='" + postContent + '\'' +
+            ", postSource='" + postSource + '\'' +
+            ", clickCount=" + clickCount +
+            ", likesCount=" + likesCount +
+            ", valueRating=" + valueRating +
+            ", version=" + version +
+            '}';
     }
 
     public static Builder getBuilder(Long userId, String postTitle, String postName, String postLink, String postContent, PostType postType, PostDisplayType displayType) {
@@ -280,7 +280,7 @@ public class PostDTO implements Serializable {
             built.postType = postType;
             built.displayType = displayType;
             built.postSource = PostUtils.createPostSource(postLink);
-          }
+        }
 
         public Builder(Long postId,
                        String postTitle,
@@ -312,9 +312,9 @@ public class PostDTO implements Serializable {
             built.postId = postId;
             return this;
         }
-        
+
         public Builder tags(Set<TagDTO> tagDTOs) {
-            built.tags= tagDTOs;
+            built.tags = tagDTOs;
             return this;
         }
 

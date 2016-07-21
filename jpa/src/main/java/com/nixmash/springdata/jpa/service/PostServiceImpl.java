@@ -62,7 +62,7 @@ public class PostServiceImpl implements PostService {
 
         } catch (Exception e) {
             throw new DuplicatePostNameException("Duplicate Post Name for Post Title: " +
-                    postDTO.getPostTitle());
+                postDTO.getPostTitle());
         }
 
         if (postDTO.getTags() != null) {
@@ -130,7 +130,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Page<Post> getPosts(Integer pageNumber, Integer pageSize) {
         PageRequest pageRequest =
-                new PageRequest(pageNumber, pageSize, sortByPostDateDesc());
+            new PageRequest(pageNumber, pageSize, sortByPostDateDesc());
         return postRepository.findAll(pageRequest);
     }
 
@@ -164,7 +164,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Page<Post> getPostsByTagId(long tagId, int pageNumber, int pageSize) {
         PageRequest pageRequest =
-                new PageRequest(pageNumber, pageSize, sortByPostDateDesc());
+            new PageRequest(pageNumber, pageSize, sortByPostDateDesc());
         return postRepository.findByTagId(tagId, pageRequest);
     }
 
@@ -226,13 +226,13 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<TagDTO> getTagCloud() {
         List<Tag> tagcloud = em.createNamedQuery("getTagCloud", Tag.class)
-                .getResultList();
+            .getResultList();
         List<TagDTO> tagDTOs = tagcloud
-                .stream()
-                .filter(t -> t.getPosts().size() > 0)
-                .limit(50)
-                .map(TagDTO::new)
-                .collect(Collectors.toList());
+            .stream()
+            .filter(t -> t.getPosts().size() > 0)
+            .limit(50)
+            .map(TagDTO::new)
+            .collect(Collectors.toList());
         return tagDTOs;
     }
 

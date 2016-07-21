@@ -109,8 +109,8 @@ public class UserServiceImpl implements UserService {
     public boolean canAccessUser(CurrentUser currentUser, String username) {
         logger.info("Checking if user={} has access to user={}", currentUser, username);
         return currentUser != null
-                && (currentUser.getUser().hasAuthority(Role.ROLE_ADMIN) ||
-                currentUser.getUsername().equals(username));
+            && (currentUser.getUser().hasAuthority(Role.ROLE_ADMIN) ||
+            currentUser.getUsername().equals(username));
     }
 
     @Transactional(readOnly = true)
@@ -195,10 +195,10 @@ public class UserServiceImpl implements UserService {
         CurrentUser currentUser = new CurrentUser(user);
 
         Authentication authentication =
-                new UsernamePasswordAuthenticationToken(
-                        currentUser,
-                        user.getPassword(),
-                        user.getAuthorities());
+            new UsernamePasswordAuthenticationToken(
+                currentUser,
+                user.getPassword(),
+                user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         return user;

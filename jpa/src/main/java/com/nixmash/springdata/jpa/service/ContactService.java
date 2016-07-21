@@ -15,18 +15,27 @@ public interface ContactService {
     // region Contacts -------------------------------------- */
 
     List<Contact> findAll();
+
     List<Contact> findByFirstName(String firstName);
+
     List<Contact> findByFirstNameAndLastName(String firstName, String lastName);
+
     List<Contact> getContactsWithDetail();
+
     List<Contact> searchByLastName(String lastName);
 
     Contact add(ContactDTO added);
+
     Contact update(ContactDTO updated) throws ContactNotFoundException;
 
     Contact findContactById(Long ID) throws ContactNotFoundException;
+
     Contact getContactByEmail(String email);
+
     Contact getContactByIdWithDetail(Long ID);
+
     Contact deleteById(Long id) throws ContactNotFoundException;
+
     Contact removeHobby(ContactDTO updated, Long hobbyId) throws ContactNotFoundException;
 
     // endregion
@@ -34,10 +43,12 @@ public interface ContactService {
     // region Contact Phones -------------------------------------- */
 
     List<ContactPhone> findContactPhonesByContactId(Long contactId);
-    ContactPhone addContactPhone(ContactPhoneDTO contactPhoneDTO);
-    ContactPhone findContactPhoneById(Long contactPhoneID);
-    ContactPhone deleteContactPhoneById(Long contactPhoneId) throws ContactNotFoundException;
 
+    ContactPhone addContactPhone(ContactPhoneDTO contactPhoneDTO);
+
+    ContactPhone findContactPhoneById(Long contactPhoneID);
+
+    ContactPhone deleteContactPhoneById(Long contactPhoneId) throws ContactNotFoundException;
 
 
     // endregion
@@ -45,8 +56,11 @@ public interface ContactService {
     // region Hobbies --------------------------------------- */
 
     Hobby addHobby(HobbyDTO hobbyDTO);
+
     Hobby updateHobbyTitle(HobbyDTO hobbyDTO) throws ContactNotFoundException;
+
     List<Hobby> findAllHobbies();
+
     Hobby findByHobbyTitle(String hobbyTitle);
 
     // endregion

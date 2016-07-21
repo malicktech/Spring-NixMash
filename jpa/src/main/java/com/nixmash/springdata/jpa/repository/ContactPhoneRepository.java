@@ -8,6 +8,7 @@ import java.util.List;
 public interface ContactPhoneRepository extends CrudRepository<ContactPhone, Long> {
 
     ContactPhone findByContactPhoneId(Long id);
+
     List<ContactPhone> findByContact_ContactId(Long id);
 
 }

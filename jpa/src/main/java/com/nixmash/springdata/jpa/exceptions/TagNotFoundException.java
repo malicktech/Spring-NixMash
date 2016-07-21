@@ -14,7 +14,7 @@ public class TagNotFoundException extends Exception {
 
     public TagNotFoundException(String msg) {
         this.msg = System.currentTimeMillis()
-                + ": " + msg;
+            + ": " + msg;
     }
 
     public String getMsg() {

@@ -21,7 +21,7 @@ public class SiteOption implements Serializable {
     @NotEmpty
     private String name;
 
-    @Column(name = "option_value", columnDefinition="TEXT")
+    @Column(name = "option_value", columnDefinition = "TEXT")
     private String value;
 
     public Long getOptionId() {
@@ -50,6 +50,6 @@ public class SiteOption implements Serializable {
 
     public void update(final String optionName, final String optionValue) {
         this.name = optionName;
-        this.value= optionValue;
+        this.value = optionValue;
     }
 }

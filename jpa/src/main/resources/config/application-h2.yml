@@ -12,7 +12,7 @@
 spring:
     datasource:
         url: jdbc:h2:mem:mixtash;DB_CLOSE_DELAY=-1
-        driver-class-name: org.h2.Driver
+        # driver-class-name: org.h2.Driver
         username: mixtash
         password:
 
@@ -22,9 +22,7 @@ spring:
     jpa:
         database: H2
         database-platform: org.hibernate.dialect.H2Dialect
-        hibernate:
-            ddl-auto: create # DDL mode (none, validate, update, create, create-drop), shortcut for the "hibernate.hbm2ddl.auto" property.
-
+        #hibernate.ddl-auto: create-drop # default value
 
 
 

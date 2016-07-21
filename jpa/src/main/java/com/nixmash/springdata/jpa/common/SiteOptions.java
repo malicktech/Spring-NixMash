@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Component
 @DependsOn("databasePopulator")
-public class SiteOptions  {
+public class SiteOptions {
 
     private SiteOptionRepository siteOptionRepository;
 
@@ -27,7 +27,7 @@ public class SiteOptions  {
 
     @PostConstruct
     public void init() throws
-            IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 
         Collection<SiteOption> siteOptionKeyValues = siteOptionRepository.findAll();
 
@@ -110,12 +110,12 @@ public class SiteOptions  {
     @Override
     public String toString() {
         return "SiteOptions{" +
-                "siteName='" + siteName + '\'' +
-                ", siteDescription='" + siteDescription + '\'' +
-                ", addGoogleAnalytics=" + addGoogleAnalytics +
-                ", googleAnalyticsTrackingId='" + googleAnalyticsTrackingId + '\'' +
-                ", integerProperty=" + integerProperty +
-                '}';
+            "siteName='" + siteName + '\'' +
+            ", siteDescription='" + siteDescription + '\'' +
+            ", addGoogleAnalytics=" + addGoogleAnalytics +
+            ", googleAnalyticsTrackingId='" + googleAnalyticsTrackingId + '\'' +
+            ", integerProperty=" + integerProperty +
+            '}';
     }
 
 
@@ -124,11 +124,11 @@ public class SiteOptions  {
     // region Utils
 
     public void setSiteOptionProperty(String property, Object value)
-            throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+        throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         if (PropertyUtils.isWriteable(this, property)) {
 
             switch (PropertyUtils
-                    .getPropertyDescriptor(this, property).getPropertyType().getSimpleName()) {
+                .getPropertyDescriptor(this, property).getPropertyType().getSimpleName()) {
                 case OPTION_VALUE_TYPE_BOOLEAN:
                     value = Boolean.valueOf(value.toString());
                     break;

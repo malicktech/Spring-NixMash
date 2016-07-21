@@ -16,13 +16,15 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * Date: 6/2/15
  * Time: 11:34 AM
  */
-@Pattern(regexp=".+@.+\\..+", message="{ExtendedEmailValidator.email}")
-@Target( { METHOD, FIELD, ANNOTATION_TYPE })
+@Pattern(regexp = ".+@.+\\..+", message = "{ExtendedEmailValidator.email}")
+@Target({METHOD, FIELD, ANNOTATION_TYPE})
 @Retention(RUNTIME)
 @Constraint(validatedBy = {})
 @Documented
 public @interface ExtendedEmailValidator {
     String message() default "{ExtendedEmailValidator.email}";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

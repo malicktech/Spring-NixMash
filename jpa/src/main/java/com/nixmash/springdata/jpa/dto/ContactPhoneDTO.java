@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * A form object for contracts.
+ *
  * @author Petri Kainulainen
  */
 public class ContactPhoneDTO {

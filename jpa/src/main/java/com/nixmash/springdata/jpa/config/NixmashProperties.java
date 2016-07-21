@@ -26,6 +26,8 @@ public class NixmashProperties {
 
     private final Metrics metrics = new Metrics();
 
+    private final Logging logging = new Logging();
+
     /* Getters */
 
     public Http getHttp() {
@@ -40,8 +42,10 @@ public class NixmashProperties {
         return metrics;
     }
 
+    public Logging getLogging() { return logging; }
 
-    /* Static classe */
+
+    /* Static class */
 
     /* ========================================================
         HTTP
@@ -104,6 +108,46 @@ public class NixmashProperties {
             }
         }
     }
+
+    /* ========================================================
+        LOGGING
+      ========================================================= */
+
+    public static class Logging {
+
+        private final Logstash logstash = new Logstash();
+
+        public Logstash getLogstash() { return logstash; }
+
+        public static class Logstash {
+
+            private boolean enabled = false;
+
+            private String host = "localhost";
+
+            private int port = 5000;
+
+            private int queueSize = 512;
+
+            public boolean isEnabled() { return enabled; }
+
+            public void setEnabled(boolean enabled) { this.enabled = enabled; }
+
+            public String getHost() { return host; }
+
+            public void setHost(String host) { this.host = host; }
+
+            public int getPort() { return port; }
+
+            public void setPort(int port) { this.port = port; }
+
+            public int getQueueSize() { return queueSize; }
+
+            public void setQueueSize(int queueSize) { this.queueSize = queueSize; }
+        }
+
+    }
+
 
     /* ========================================================
         METRICS

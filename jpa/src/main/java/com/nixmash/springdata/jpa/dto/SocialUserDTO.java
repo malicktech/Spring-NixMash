@@ -14,24 +14,24 @@ import com.nixmash.springdata.jpa.model.validators.ExtendedEmailValidator;
 
 public class SocialUserDTO {
 
-    @Length(min= User.MIN_LENGTH_USERNAME, max=User.MAX_LENGTH_USERNAME)
+    @Length(min = User.MIN_LENGTH_USERNAME, max = User.MAX_LENGTH_USERNAME)
     private String username = "";
 
     @Basic
     @ExtendedEmailValidator
-    @Length(max=User.MAX_LENGTH_EMAIL_ADDRESS)
+    @Length(max = User.MAX_LENGTH_EMAIL_ADDRESS)
     private String email = "";
 
     private String password = "";
 
     private SignInProvider signInProvider;
-    
+
     @NotEmpty
-    @Length(min=User.MIN_LENGTH_FIRST_NAME, max=User.MAX_LENGTH_FIRST_NAME)
+    @Length(min = User.MIN_LENGTH_FIRST_NAME, max = User.MAX_LENGTH_FIRST_NAME)
     private String firstName = "";
 
     @NotEmpty
-    @Length(min=User.MIN_LENGTH_LAST_NAME, max=User.MAX_LENGTH_LAST_NAME)
+    @Length(min = User.MIN_LENGTH_LAST_NAME, max = User.MAX_LENGTH_LAST_NAME)
     private String lastName = "";
 
     private Collection<Authority> authorities;
@@ -95,12 +95,12 @@ public class SocialUserDTO {
     @Override
     public String toString() {
         return "SocialUserDTO{" +
-                ", username='" + username + '\'' +
-                ", firstName='" + firstName + '\'' +
-                "lastName='" + lastName + '\'' +
-                "signInProvider='" + signInProvider + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+            ", username='" + username + '\'' +
+            ", firstName='" + firstName + '\'' +
+            "lastName='" + lastName + '\'' +
+            "signInProvider='" + signInProvider + '\'' +
+            ", email='" + email + '\'' +
+            '}';
     }
 
 }

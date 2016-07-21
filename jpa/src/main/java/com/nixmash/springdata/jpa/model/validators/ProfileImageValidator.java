@@ -13,11 +13,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Component
-public class ProfileImageValidator  implements Validator {
+public class ProfileImageValidator implements Validator {
 
     private static final Logger logger = LoggerFactory.getLogger(ProfileImageValidator.class);
 
-    @Value("${profile.image.upload.size}")
+    @Value("${mintster.profile.image.upload.size}")
     private Long imageMaxSize;
 
     @Override

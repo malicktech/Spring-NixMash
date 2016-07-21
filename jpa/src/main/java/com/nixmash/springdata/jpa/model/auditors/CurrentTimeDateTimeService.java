@@ -7,12 +7,11 @@ import java.time.ZonedDateTime;
 
 /**
  * This class returns the current time.
- *
+ * <p>
  * From Petri Kainulainen's JPA Examples Project on GitHub
- *
+ * <p>
  * spring-data-jpa-examples/query-methods/
  * https://goo.gl/lY7sT5
- *
  */
 public class CurrentTimeDateTimeService implements DateTimeService {
 
@@ -20,7 +19,7 @@ public class CurrentTimeDateTimeService implements DateTimeService {
 
     @Override
     public ZonedDateTime getCurrentDateAndTime() {
-        ZonedDateTime currentDateAndTime =  ZonedDateTime.now();
+        ZonedDateTime currentDateAndTime = ZonedDateTime.now();
         return currentDateAndTime;
     }
 }

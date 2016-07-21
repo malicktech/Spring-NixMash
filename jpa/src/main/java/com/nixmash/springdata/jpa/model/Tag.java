@@ -9,12 +9,12 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "tags")
 @NamedNativeQueries({
-        @NamedNativeQuery(
-                name = "getTagCloud",
-                query = "select count(*) as `tagCount`, t.tag_value, t.tag_id from tags t " +
-                        " inner join post_tag_ids pt on t.tag_id = pt.tag_id " +
-                        "group by t.tag_value order by t.tag_value;",
-                resultClass = Tag.class)
+    @NamedNativeQuery(
+        name = "getTagCloud",
+        query = "select count(*) as `tagCount`, t.tag_value, t.tag_id from tags t " +
+            " inner join post_tag_ids pt on t.tag_id = pt.tag_id " +
+            "group by t.tag_value order by t.tag_value;",
+        resultClass = Tag.class)
 })
 public class Tag implements Serializable {
 

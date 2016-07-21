@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-public class SiteOptionMapDTO implements Serializable{
+public class SiteOptionMapDTO implements Serializable {
     private static final long serialVersionUID = -5465065342755162883L;
 
     public SiteOptionMapDTO() {
@@ -70,10 +70,10 @@ public class SiteOptionMapDTO implements Serializable{
     // endregion
 
     public static Builder withGeneralSettings(
-                                           String siteName,
-                                           String siteDescription,
-                                           Boolean addGoogleAnalytics,
-                                           String googleAnalyticsTrackingId){
+        String siteName,
+        String siteDescription,
+        Boolean addGoogleAnalytics,
+        String googleAnalyticsTrackingId) {
 
         return new Builder(siteName, siteDescription, addGoogleAnalytics, googleAnalyticsTrackingId);
     }

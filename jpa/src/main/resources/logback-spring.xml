@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration scan="true">
+
+    <!--
+        Base logback configuration provided for compatibility with Spring Boot 1.1
+    -->
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
-
-    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
-
-    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
-        <resetJUL>true</resetJUL>
-    </contextListener>
-
-    <root level="#logback.loglevel#">
-        <appender-ref ref="CONSOLE"/>
-    </root>
 
     <!-- To enable JMX Management -->
     <jmxConfigurator/>
@@ -24,6 +18,30 @@
 
     <logger name="com.nixmash.springdata" level="info"/>
 
+    <logger name="javax.activation" level="WARN"/>
+    <logger name="javax.mail" level="WARN"/>
+    <logger name="javax.xml.bind" level="WARN"/>
+
+    <logger name="ch.qos.logback" level="WARN"/>
+
+    <logger name="com.codahale.metrics" level="WARN"/>
+    <logger name="com.ryantenney" level="WARN"/>
+
+    <logger name="com.zaxxer" level="WARN"/> <!--HicariCP Pool log-->
+    <logger name="net.sf.ehcache" level="WARN"/>
+
+    <logger name="org.apache" level="WARN"/>
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
+
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.hibernate.validator" level="WARN"/>
+    <logger name="org.hibernate.ejb.HibernatePersistenceProvider" level="OFF"/>
+
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.springframework.web" level="WARN"/>
+    <logger name="org.springframework.security" level="WARN"/>
+    <logger name="org.springframework.cache" level="WARN"/>
+
     <logger name="org.thymeleaf" level="off"/>
     <logger name="org.hibernate" level="off"/>
 
@@ -31,5 +49,12 @@
 
     <root level="OFF">
         <appender-ref ref="console"/>
+    </root>
+
+    <root level="#logback.loglevel#">
+        <!-- For Console Log -->
+        <appender-ref ref="CONSOLE"/>
+        <!-- For File Log -->
+        <!--<appender-ref ref="FILE"/>-->
     </root>
 </configuration>

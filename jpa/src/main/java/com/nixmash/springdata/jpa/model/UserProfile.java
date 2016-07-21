@@ -38,11 +38,11 @@ public class UserProfile {
     private String city;
 
     @Column
-    @Size(min=2)
+    @Size(min = 2)
     private String state;
 
     @Column
-    @Size(min=5, max=10)
+    @Size(min = 5, max = 10)
     private String zip;
 
     @Column

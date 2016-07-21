@@ -15,7 +15,7 @@ public class PostNotFoundException extends Exception {
 
     public PostNotFoundException(String msg) {
         this.msg = System.currentTimeMillis()
-                + ": " + msg;
+            + ": " + msg;
     }
 
     public String getMsg() {

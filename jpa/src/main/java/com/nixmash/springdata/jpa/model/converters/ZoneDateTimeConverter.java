@@ -12,7 +12,7 @@ public class ZoneDateTimeConverter implements AttributeConverter<java.time.Zoned
 
     @Override
     public java.sql.Timestamp convertToDatabaseColumn(ZonedDateTime entityValue) {
-       return Timestamp.from(entityValue.toInstant());
+        return Timestamp.from(entityValue.toInstant());
     }
 
     @Override

@@ -39,7 +39,7 @@ public class ContactFormValidator implements Validator {
     private void validateContactPhones(Errors errors, Contact form) {
         for (ContactPhone contactPhone : form.getContactPhones())
             if (contactPhone.getPhoneNumber().isEmpty() ||
-                    contactPhone.getPhoneType().isEmpty()) {
+                contactPhone.getPhoneType().isEmpty()) {
                 errors.reject("NotEmpty.contact.contactPhone.field");
                 break;
             }

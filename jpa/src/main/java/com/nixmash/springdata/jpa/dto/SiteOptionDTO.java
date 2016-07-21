@@ -55,10 +55,10 @@ public class SiteOptionDTO {
     @Override
     public String toString() {
         return "SiteOptionDTO{" +
-                "optionId=" + optionId +
-                ", name='" + name + '\'' +
-                ", value='" + value + '\'' +
-                '}';
+            "optionId=" + optionId +
+            ", name='" + name + '\'' +
+            ", value='" + value + '\'' +
+            '}';
     }
 
     // endregion

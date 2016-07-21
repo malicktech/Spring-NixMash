@@ -30,7 +30,8 @@ public class ContactPhone implements Serializable {
 
     private static final long serialVersionUID = 8032497024653204603L;
 
-    public ContactPhone() {}
+    public ContactPhone() {
+    }
 
     public ContactPhone(ContactPhoneDTO contactPhoneDTO) {
         this.phoneType = contactPhoneDTO.getPhoneType();
@@ -99,15 +100,14 @@ public class ContactPhone implements Serializable {
     @Override
     public String toString() {
         return new ToStringCreator(this)
-                .append("id", this.getContactPhoneId())
-                .append("new", this.isNew())
-                .append("contactId", this.getContact().getContactId())
-                .append("phoneType", this.getPhoneType())
-                .append("phoneNumber", this.getPhoneNumber())
-                .append("version", this.getVersion())
-                .toString();
+            .append("id", this.getContactPhoneId())
+            .append("new", this.isNew())
+            .append("contactId", this.getContact().getContactId())
+            .append("phoneType", this.getPhoneType())
+            .append("phoneNumber", this.getPhoneNumber())
+            .append("version", this.getVersion())
+            .toString();
     }
-
 
 
     public void update(final String phoneType, final String phoneNumber) {

@@ -6,7 +6,7 @@ import com.nixmash.springdata.jpa.common.ApplicationSettings;
 import static com.nixmash.springdata.jpa.components.ApplicationContextUI.getAppSettingsFromContext;
 
 public class CurrentUser
-        extends org.springframework.security.core.userdetails.User {
+    extends org.springframework.security.core.userdetails.User {
 
     private static final long serialVersionUID = 7828419298616811182L;
 
@@ -15,7 +15,7 @@ public class CurrentUser
 
     public CurrentUser(User user) {
         super(user.getUsername(), user.getPassword(),
-                user.getAuthorities());
+            user.getAuthorities());
         this.user = user;
     }
 
@@ -52,7 +52,7 @@ public class CurrentUser
     @Override
     public String toString() {
         return "CurrentUser{" +
-                "user=" + user +
-                '}' + super.toString();
+            "user=" + user +
+            '}' + super.toString();
     }
 }

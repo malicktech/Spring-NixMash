@@ -2,9 +2,6 @@ package com.nixmash.springdata.jpa.config;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.ehcache.InstrumentedEhcache;
-import com.nixmash.springdata.jpa.config.db.H2Config;
-import com.nixmash.springdata.jpa.config.db.JpaCommonConfig;
-import com.nixmash.springdata.jpa.config.db.MySqlConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -26,7 +23,7 @@ import java.util.SortedSet;
 @SuppressWarnings("unused")
 @Configuration
 @EnableCaching
-@AutoConfigureAfter(value = {MySqlConfig.class, H2Config.class, JpaCommonConfig.class})
+@AutoConfigureAfter(value = {DatabaseConfiguration.class})
 public class CacheConfiguration {
 
     private final Logger log = LoggerFactory.getLogger(CacheConfiguration.class);

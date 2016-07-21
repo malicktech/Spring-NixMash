@@ -2,6 +2,8 @@ package com.nixmash.springdata.jpa.config;
 
 import com.nixmash.springdata.jpa.model.auditors.CurrentTimeDateTimeService;
 import com.nixmash.springdata.jpa.model.auditors.DateTimeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,12 +19,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Time: 4:20 PM
  */
 @Configuration
-@EnableConfigurationProperties
-@EnableTransactionManagement
-@ComponentScan(basePackages = "com.nixmash.springdata.jpa")
-@EnableJpaRepositories(basePackages = "com.nixmash.springdata.jpa")
-//@PropertySource("classpath:/META-INF/spring/application.properties")
 public class ApplicationConfig {
+
+    private static final Logger logger = LoggerFactory.getLogger(ApplicationConfig.class);
 
 
     @Bean

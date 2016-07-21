@@ -79,7 +79,7 @@ public class UserDTO {
     }
 
     public String getRepeatedPassword() {
-          return repeatedPassword;
+        return repeatedPassword;
     }
 
     public void setRepeatedPassword(String repeatedPassword) {
@@ -149,10 +149,10 @@ public class UserDTO {
     @Override
     public String toString() {
         return "UserCreateForm{" +
-                ", username=" + username  +
-                ", firstName=" + firstName +
-                ", lastName=" + lastName +
-                ", email=" + email +
-                '}';
+            ", username=" + username +
+            ", firstName=" + firstName +
+            ", lastName=" + lastName +
+            ", email=" + email +
+            '}';
     }
 }

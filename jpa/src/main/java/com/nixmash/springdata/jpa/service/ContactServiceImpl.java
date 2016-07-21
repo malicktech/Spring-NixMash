@@ -57,7 +57,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Transactional(readOnly = true)
     public List<Contact> findByFirstNameAndLastName(
-            String firstName, String lastName) {
+        String firstName, String lastName) {
         return contactRepository.findByFirstNameAndLastName(firstName, lastName);
     }
 
@@ -124,7 +124,7 @@ public class ContactServiceImpl implements ContactService {
             if (contactDto.getContactPhones() != null) {
                 for (ContactPhoneDTO contactPhoneDTO : contactDto.getContactPhones()) {
                     ContactPhone contactPhone =
-                            contactPhoneRepository.findByContactPhoneId(contactPhoneDTO.getContactPhoneId());
+                        contactPhoneRepository.findByContactPhoneId(contactPhoneDTO.getContactPhoneId());
                     if (contactPhone != null) {
                         contactPhone.update(contactPhoneDTO.getPhoneType(), contactPhoneDTO.getPhoneNumber());
                     } else {
@@ -158,18 +158,18 @@ public class ContactServiceImpl implements ContactService {
 
         //Creates an instance of a Contact by using the builder pattern
         Contact contact = Contact.getBuilder(contactDto.getFirstName(),
-                contactDto.getLastName(), contactDto.getEmail())
-                .birthDate(contactDto.getBirthDate())
-                .build();
+            contactDto.getLastName(), contactDto.getEmail())
+            .birthDate(contactDto.getBirthDate())
+            .build();
 
         Contact saved = contactRepository.save(contact);
 
         if (contactDto.getContactPhones() != null) {
             for (ContactPhoneDTO contactPhoneDTO : contactDto.getContactPhones()) {
                 ContactPhone contactPhone = ContactPhone.getBuilder(saved,
-                        contactPhoneDTO.getPhoneType(),
-                        contactPhoneDTO.getPhoneNumber())
-                        .build();
+                    contactPhoneDTO.getPhoneType(),
+                    contactPhoneDTO.getPhoneNumber())
+                    .build();
 
                 contactPhoneRepository.save(contactPhone);
             }
@@ -224,9 +224,9 @@ public class ContactServiceImpl implements ContactService {
     public ContactPhone addContactPhone(ContactPhoneDTO contactPhoneDTO) {
         Contact contact = contactRepository.findOne(contactPhoneDTO.getContactId());
         ContactPhone contactPhone = ContactPhone.getBuilder(contact,
-                contactPhoneDTO.getPhoneType(),
-                contactPhoneDTO.getPhoneNumber())
-                .build();
+            contactPhoneDTO.getPhoneType(),
+            contactPhoneDTO.getPhoneNumber())
+            .build();
 
         return contactPhoneRepository.save(contactPhone);
     }
@@ -295,9 +295,9 @@ public class ContactServiceImpl implements ContactService {
     @Transactional
     private ContactPhone saveContactPhone(Contact contact, ContactPhoneDTO contactPhoneDTO) {
         ContactPhone contactPhone = ContactPhone.getBuilder(contact,
-                contactPhoneDTO.getPhoneType(),
-                contactPhoneDTO.getPhoneNumber())
-                .build();
+            contactPhoneDTO.getPhoneType(),
+            contactPhoneDTO.getPhoneNumber())
+            .build();
 
         return contactPhoneRepository.save(contactPhone);
     }

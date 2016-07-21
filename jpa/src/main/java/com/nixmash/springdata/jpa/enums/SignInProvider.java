@@ -1,7 +1,7 @@
 package com.nixmash.springdata.jpa.enums;
 
 public enum SignInProvider {
-	SITE,
+    SITE,
     FACEBOOK,
     TWITTER,
     GOOGLE

@@ -8,14 +8,13 @@ import java.util.GregorianCalendar;
 /**
  * This class obtains the current time by using a {@link DateTimeService}
  * object. The reason for this is that we can use a different implementation in our integration tests.
- *
+ * <p>
  * Uses {@link CurrentTimeDateTimeService} class.
- *
+ * <p>
  * From Petri Kainulainen's JPA Examples Project on GitHub
- *
+ * <p>
  * spring-data-jpa-examples/query-methods/
  * https://goo.gl/lY7sT5
- *
  */
 public class AuditingDateTimeProvider implements DateTimeProvider {
 

@@ -51,6 +51,7 @@ public interface PostService {
     List<String> getTagValues();
 
     Set<TagDTO> getTagDTOs(Long postId);
+
     Tag getTag(String tagValue) throws TagNotFoundException;
 
     Page<Post> getPostsByTagId(long tagId, int pageNumber, int pageSize);

@@ -13,7 +13,7 @@ public class ApplicationContextUI implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext appContext)
-            throws BeansException {
+        throws BeansException {
         ctx = appContext;
     }
 

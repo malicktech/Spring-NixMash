@@ -53,29 +53,29 @@ public class User implements UserDetails, Serializable {
 
     @Column(unique = true)
     @NotEmpty
-    @Length(min=MIN_LENGTH_USERNAME, max=MAX_LENGTH_USERNAME)
+    @Length(min = MIN_LENGTH_USERNAME, max = MAX_LENGTH_USERNAME)
     private String username;
 
     @Column
     @NotEmpty
-    @Length(min=MIN_LENGTH_PASSWORD)
+    @Length(min = MIN_LENGTH_PASSWORD)
     private String password;
 
     @Basic
     @ExtendedEmailValidator
     @NotEmpty
-    @Length(max=MAX_LENGTH_EMAIL_ADDRESS)
-    @Column(unique=true, nullable = false)
+    @Length(max = MAX_LENGTH_EMAIL_ADDRESS)
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Column(name = "first_name")
     @NotEmpty
-    @Length(max=MAX_LENGTH_FIRST_NAME)
+    @Length(max = MAX_LENGTH_FIRST_NAME)
     private String firstName;
 
     @Column(name = "last_name")
     @NotEmpty
-    @Length(max=MAX_LENGTH_LAST_NAME)
+    @Length(max = MAX_LENGTH_LAST_NAME)
     private String lastName;
 
     @Column(name = "account_expired")
@@ -87,11 +87,11 @@ public class User implements UserDetails, Serializable {
     @Column(name = "credentials_expired")
     private boolean credentialsExpired = false;
 
-    @Column(name = "provider_id", length =25)
+    @Column(name = "provider_id", length = 25)
     @Enumerated(EnumType.STRING)
     private SignInProvider signInProvider;
 
-    @Column(name = "user_key", length =25)
+    @Column(name = "user_key", length = 25)
     private String userKey;
 
     @Column(name = "has_avatar")
@@ -102,8 +102,8 @@ public class User implements UserDetails, Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_authorities",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "authority_id"))
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "authority_id"))
     public Collection<Authority> authorities;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
@@ -245,24 +245,24 @@ public class User implements UserDetails, Serializable {
     }
 
 // @formatter:off
-    
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", username=" + username +
-                ", email=" + email +
-                ", firstName=" + firstName  +
-                ", lastName=" + lastName  +
-                ", accountExpired=" + accountExpired +
-                ", accountLocked=" + accountLocked +
-                ", credentialsExpired=" + credentialsExpired +
-                ", userKey=" + userKey +
-                ", hasAvatar=" + hasAvatar +
-                ", signInProvider=" + signInProvider +
-                ", enabled=" + enabled +
-                ", new=" + this.isNew() +
-                '}';
+            "id=" + id +
+            ", username=" + username +
+            ", email=" + email +
+            ", firstName=" + firstName +
+            ", lastName=" + lastName +
+            ", accountExpired=" + accountExpired +
+            ", accountLocked=" + accountLocked +
+            ", credentialsExpired=" + credentialsExpired +
+            ", userKey=" + userKey +
+            ", hasAvatar=" + hasAvatar +
+            ", signInProvider=" + signInProvider +
+            ", enabled=" + enabled +
+            ", new=" + this.isNew() +
+            '}';
     }
 
     public void update(String username, String firstName, String lastName, String email) {
@@ -273,5 +273,5 @@ public class User implements UserDetails, Serializable {
     }
 
     // @formatter:on
-    
+
 }

@@ -15,7 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 
 @Service("siteService")
 @Transactional
-public class SiteServiceImpl implements SiteService{
+public class SiteServiceImpl implements SiteService {
 
     private static final Logger logger = LoggerFactory.getLogger(SiteServiceImpl.class);
 
@@ -31,7 +31,7 @@ public class SiteServiceImpl implements SiteService{
     @Override
     public SiteOption update(SiteOptionDTO siteOptionDTO) throws SiteOptionNotFoundException {
         logger.info("Updating siteOption property {} with value: {}",
-                siteOptionDTO.getName(), siteOptionDTO.getValue());
+            siteOptionDTO.getName(), siteOptionDTO.getValue());
 
         SiteOption found = findOptionByName(siteOptionDTO.getName());
         found.update(siteOptionDTO.getName(), siteOptionDTO.getValue());

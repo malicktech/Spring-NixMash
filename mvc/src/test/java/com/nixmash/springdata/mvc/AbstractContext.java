@@ -15,7 +15,7 @@ import com.nixmash.springdata.solr.enums.SolrConfigProfile;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @Transactional
-@ActiveProfiles({ DataConfigProfile.H2, SolrConfigProfile.DEV })
+@ActiveProfiles({ DataConfigProfile.SPRING_PROFILE_H2, SolrConfigProfile.DEV })
 public class AbstractContext {
 
 	@Autowired

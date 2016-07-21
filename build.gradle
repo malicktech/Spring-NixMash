@@ -13,25 +13,47 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath 'org.springframework:springloaded:1.2.6.RELEASE'
-		classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
-        classpath "io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE"
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${spring_boot_version}"
+		classpath "org.springframework:springloaded:${spring_loaded_version}"
+        /* Provides additional optional and provided dependency configurations for Gradle
+            https://github.com/spring-projects/gradle-plugins/tree/master/propdeps-plugin */
+		classpath "org.springframework.build.gradle:propdeps-plugin:${gradle_propdeps_plugin_version}"
+        /* Gradle plugin making it easier/safer to use Java annotation processors
+            https://github.com/tbroyer/gradle-apt-plugin */
+        classpath "net.ltgt.gradle:gradle-apt-plugin:${gradle_apt_plugin_version}"
+        /* provides Maven-like dependency management functionality
+            https://github.com/spring-gradle-plugins/dependency-management-plugin */
+        classpath "io.spring.gradle:dependency-management-plugin:${gradle_dependency_management_plugin_version}"
     }
 }
 
+// load profile Build config
+if (project.hasProperty('prod')) {
+    apply from: 'gradle/profile_prod.gradle'
+} else {
+    apply from: 'gradle/profile_dev.gradle'
+}
+
+// the subprojects without rootProject
+subprojects {
+
+    apply plugin: 'java'
+}
+
+// rootProject and the subprojects
 allprojects {
 
-	apply plugin: 'application'
+	apply plugin: 'application' // https://docs.gradle.org/current/userguide/application_plugin.html
 	apply plugin: 'idea'
 	apply plugin: 'eclipse'
 	apply plugin: 'spring-boot'
-	apply plugin: 'java'
 	apply plugin: 'war'
 	apply plugin: 'propdeps'
 	defaultTasks 'bootRun'
 	sourceCompatibility = 1.8
 	targetCompatibility = 1.8
+
+
 
 	repositories {
         mavenLocal()
@@ -44,6 +66,7 @@ allprojects {
 
 	configurations {
 		all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+        providedRuntime
 	}
 
 	dependencies {
@@ -64,6 +87,16 @@ allprojects {
             exclude(module: 'metrics-core')
             exclude(module: 'metrics-healthchecks')
         }
+
+        // Jackson
+        compile "com.fasterxml.jackson.datatype:jackson-datatype-json-org:${jackson_version}"
+        compile "com.fasterxml.jackson.datatype:jackson-datatype-hppc:${jackson_version}"
+        compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jackson_version}"
+        compile "com.fasterxml.jackson.datatype:jackson-datatype-hibernate4"
+        compile "com.fasterxml.jackson.core:jackson-annotations:${jackson_version}"
+        compile "com.fasterxml.jackson.core:jackson-databind:${jackson_version}"
+
+        // Logback encoder which creates JSON for use with Logstash
         compile("net.logstash.logback:logstash-logback-encoder:${logstash_logback_encoder_version}") {
             exclude(module: 'ch.qos.logback')
         }
@@ -90,8 +123,8 @@ allprojects {
         // Tools for generating executable JAR/WAR files
         compile "org.springframework.boot:spring-boot-loader-tools"
         optional "org.springframework.boot:spring-boot-configuration-processor"
-
-        compile "org.springframework.boot:spring-boot-starter-logging"
+        // starter logging is bring by starter-web
+        // compile "org.springframework.boot:spring-boot-starter-logging"
         compile "org.springframework.boot:spring-boot-starter-aop"
 
         // Spring
@@ -105,27 +138,27 @@ allprojects {
         }
 
         // Common Utils
-        compile "commons-lang:commons-lang:${commons_lang_version}"
+        compile "org.apache.commons:commons-lang3:${commons_lang_version}"
         compile "commons-io:commons-io:${commons_io_version}"
         compile "javax.inject:javax.inject:${javax_inject_version}"
+        // provides easy-to-use wrappers around  around reflection(java.lang.reflect) and introspection(java.beans) |http://commons.apache.org/proper/commons-beanutils/
+        compile "commons-beanutils:commons-beanutils:${commons_beanutils}"
 
-		compile 'org.hibernate:hibernate-core'
+        compile 'org.hibernate:hibernate-core'
 		compile 'javax.servlet:javax.servlet-api'
 		compile 'org.javassist:javassist'
 		compile 'commons-dbcp:commons-dbcp'
 		compile 'org.apache.tomcat:tomcat-dbcp:8.0.8'
 		compile 'com.google.guava:guava-gwt:18.0'
-		compile 'org.apache.commons:commons-lang3:3.4'
-		compile 'commons-beanutils:commons-beanutils:1.9.2'
-		compile 'org.hibernate:hibernate-validator'
 		compile 'javax.el:javax.el-api:3.0.1-b04'
 		compile 'org.jadira.usertype:usertype.extended:3.2.0.GA'
-		compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.6.1'
 		compile 'net.coobird:thumbnailator:0.4.8'
 		compile 'joda-time:joda-time:2.9.4'
-		
-		runtime('com.h2database:h2')
-		runtime('mysql:mysql-connector-java')
+
+		//runtime 'com.h2database:h2'
+		//runtime 'mysql:mysql-connector-java'
+        compile "mysql:mysql-connector-java"
+        compile "com.h2database:h2"
 
 		testCompile 'org.springframework.boot:spring-boot-starter-test'
         testCompile "org.assertj:assertj-core:${assertj_core_version}"
@@ -135,11 +168,29 @@ allprojects {
 	}
 
 
+    // IDE configuration block
 
+    // http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#howto-reload-springloaded-gradle-and-intellij-idea
+    idea {
+        module {
+            inheritOutputDirs = false
+            downloadJavadoc = true
+            outputDir = file("$buildDir/classes/main/")
+        }
+    }
+    eclipse {
+        classpath {
+            downloadJavadoc = true
+            // containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+            // containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+        }
+    }
+
+
+    /* http://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-gradle-plugin.html#build-tool-plugins-gradle-repackage-configuration */
 	bootRepackage {
 		mainClass = 'com.nixmash.springdata.mvc.common.Application'
 	}
-
 
 	springBoot {
 		mainClass = 'com.nixmash.springdata.mvc.common.Application'
@@ -149,32 +200,19 @@ allprojects {
 		println gradle.gradleHomeDir
 	}
 
-    // http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#howto-reload-springloaded-gradle-and-intellij-idea
-	idea {
-		module {
-			inheritOutputDirs = false
-			outputDir = file("$buildDir/classes/main/")
-		}
-	}
-
     task cleanResources(type: Delete) {
         delete 'build/resources'
     }
 
-	task wrapper(type: Wrapper) { gradleVersion = '2.14' }
-	
-	task stage(dependsOn: 'bootRepackage') {
-	}
+	task wrapper(type: Wrapper) {
+        gradleVersion = '2.14'
+    }
 
 
-	eclipse {
-		classpath {
-			containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
-			containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
-		}
-	}
+     task stage(dependsOn: 'bootRepackage') {
+     }
 
     compileJava.dependsOn processResources
     processResources.dependsOn cleanResources
-	
+
 }

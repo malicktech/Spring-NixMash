@@ -32,8 +32,8 @@ public class GitHubTests extends AbstractContext {
 
     @Before
     public void setUp() {
-        gitHubRepoUrl = environment.getProperty("github.repo.url");
-        gitHubUserUrl = environment.getProperty("github.user.url");
+        gitHubRepoUrl = environment.getProperty("mintster.github.repo.url");
+        gitHubUserUrl = environment.getProperty("mintster.github.user.url");
         restTemplate = new TestRestTemplate();
     }
 

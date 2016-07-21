@@ -139,8 +139,8 @@ public class WebUI {
 
     public GitHubDTO getGitHubStats() {
 
-        String gitHubRepoUrl = environment.getProperty("github.repo.url");
-        String gitHubUserUrl = environment.getProperty("github.user.url");
+        String gitHubRepoUrl = environment.getProperty("mintster.github.repo.url");
+        String gitHubUserUrl = environment.getProperty("mintster.github.user.url");
 
         // Load Repository JSON elements into GitHubDTO Object
 

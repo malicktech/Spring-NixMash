@@ -39,14 +39,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserDetailsService userDetailsService;
 
 	@Override
-	@Profile(DataConfigProfile.H2)
+	@Profile(DataConfigProfile.SPRING_PROFILE_H2)
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	@Order(2)
 	@Configuration
-	@Profile(DataConfigProfile.MYSQL)
+	@Profile(DataConfigProfile.SPRING_PROFILE_H2)
 	protected static class MySqlWebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
 		@Autowired
@@ -78,41 +78,39 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.authorizeRequests()
-				.antMatchers(PERMITALL_RESOURCE_LIST).permitAll()
-				.antMatchers(ADMIN_RESOURCE_LIST).hasAuthority("ROLE_ADMIN")
-				.anyRequest()
-				.authenticated()
-			.and()
-				.anonymous()
-				.key("anonymous")
-			.and()
-				.formLogin()
+				//Configures url based authorization
+				.authorizeRequests()
+					//Anyone can access the urls
+					.antMatchers(PERMITALL_RESOURCE_LIST).permitAll()
+					//The rest of the our application is protected.
+					.antMatchers(ADMIN_RESOURCE_LIST).hasAuthority("ROLE_ADMIN")
+					.anyRequest()
+					.authenticated()
+				.and()
+					.anonymous()
+					.key("anonymous")
+				.and()
+				//Configures form login
+					.formLogin()
 					.loginPage("/signin")
 					.loginProcessingUrl("/signin/authenticate")
 					.failureUrl("/signin?error")
 					.permitAll()
-			.and()
-				.logout()
+				.and()
+				//Configures the logout function
+					.logout()
 					.deleteCookies("remember-me")
 					.permitAll()
-			.and()
-				.rememberMe()
-			.and()
-				.exceptionHandling()
-				.accessDeniedPage("/403")
-		   .and()
-				.apply(new SpringSocialConfigurer()
-				.postLoginUrl("/")
-				.alwaysUsePostLoginUrl(true));
-
-//		http
-//			.authorizeRequests()
-//				.antMatchers(ADMIN_RESOURCE_LIST)
-//				.hasRole("ADMIN");
-
+				.and()
+				// Remember me checkbox
+					.rememberMe()
+				.and()
+				// Exception error page
+					.exceptionHandling()
+					.accessDeniedPage("/403")
+				.and()
+				//Adds the SocialAuthenticationFilter to Spring Security's filter chain.
+                        .apply(new SpringSocialConfigurer().postLoginUrl("/").alwaysUsePostLoginUrl(true));
 	}
-
-	// @formatter:on
 
 }

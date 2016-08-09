@@ -1,7 +1,8 @@
 package com.nixmash.springdata.solr.config;
 
-import javax.annotation.Resource;
-
+import com.nixmash.springdata.solr.common.NixmashSolrProperties;
+import com.nixmash.springdata.solr.enums.Constants;
+import com.nixmash.springdata.solr.repository.simple.SimpleProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,27 +10,27 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.server.support.EmbeddedSolrServerFactoryBean;
+import org.springframework.data.solr.server.support.HttpSolrServerFactoryBean;
 
-import com.nixmash.springdata.solr.common.SolrSettings;
-import com.nixmash.springdata.solr.repository.simple.SimpleProductRepository;
+import javax.annotation.Resource;
 
 @Configuration
-@Profile("dev")
-public class EmbeddedSolrContext {
+@Profile(Constants.SPRING_PROFILE_DEVELOPMENT)
+public class EmbeddedServerSolrContext {
 
 
 	@Resource
 	private Environment environment;
 
 	@Autowired
-	private SolrSettings solrSettings;
-	
-	@Bean(name = "solrServer")
-	public EmbeddedSolrServerFactoryBean solrServerFactoryBean() {
-		EmbeddedSolrServerFactoryBean factory = new EmbeddedSolrServerFactoryBean();
-		factory.setSolrHome(solrSettings.getSolrEmbeddedPath());
-		return factory;
-	}
+	private NixmashSolrProperties nixmashSolrProperties;
+
+    @Bean(name = "solrServer")
+    public EmbeddedSolrServerFactoryBean solrServerFactoryBean() {
+        EmbeddedSolrServerFactoryBean factory = new EmbeddedSolrServerFactoryBean();
+        factory.setSolrHome(nixmashSolrProperties.getSolrEmbeddedPath());
+        return factory;
+    }
 
 	@Bean
 	public SolrTemplate solrTemplate() throws Exception {

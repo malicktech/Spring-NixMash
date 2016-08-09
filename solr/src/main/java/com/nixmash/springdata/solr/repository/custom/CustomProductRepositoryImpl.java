@@ -39,15 +39,7 @@ import com.nixmash.springdata.solr.enums.SolrDocType;
 import com.nixmash.springdata.solr.model.IProduct;
 import com.nixmash.springdata.solr.model.Product;
 
-/**
- * 
- * NixMash Spring Notes: ---------------------------------------------------
- * 
- * Based on Christoph Strobl's Spring Solr Repository Example for Spring Boot
- * 
- * On GitHub: https://goo.gl/JoAYaT
- * 
- */
+
 @Repository
 public class CustomProductRepositoryImpl implements CustomBaseRepository {
 

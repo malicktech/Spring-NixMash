@@ -1,10 +1,24 @@
 
+jar {
+    manifest { attributes 'Main-Class': 'com.nixmash.springdata.solr.SolrLauncher' }
+}
+
+dependencies {
+    // Starter for using the Apache Solr search platform with Spring Data Solr
+	// Provide : spring-data-solr (solr-core + solr-solrj) + solr-solrj
+	compile 'org.springframework.boot:spring-boot-starter-data-solr'
+    // TODO delete
+	compile ('org.apache.solr:solr-core:4.10.4') {
+		exclude(group: "org.slf4j", module: "slf4j-jdk14")
+		exclude(group: "ch.qos.logback", module: "logback-classic")
+	}
+
+
+}
+
 sourceSets {
 	main {
-		java.srcDirs = [
-			'src/main/java',
-			'src/main/resources'
-		]
+		java.srcDirs = ['src/main/java','src/main/resources']
 		resources.srcDir('src/main/resources')
 	}
 	test { java.srcDir('src/test/java') }
@@ -14,30 +28,17 @@ springBoot {
 	mainClass = 'com.nixmash.springdata.solr.SolrLauncher'
 }
 
-jar {
-	baseName = 'springdata-solr'
-	version = '0.0.1-SNAPSHOT'
-}
-
-jar {
-	manifest { attributes 'Main-Class': 'com.nixmash.springdata.solr.SolrLauncher' }
-}
-
-dependencies {
-	compile 'org.springframework.boot:spring-boot-starter-data-solr'
-	compile ('org.apache.solr:solr-core:4.10.4') {
-		exclude(group: "org.slf4j", module: "slf4j-jdk14")
-		exclude(group: "ch.qos.logback", module: "logback-classic")
-	}
-}
-
-run { systemProperty 'spring.profiles.active', 'prod' }
+run { systemProperty 'spring.profiles.active', 'dev' }
 
 bootRun {
 	addResources = false
-	systemProperty 'spring.profiles.active', 'prod'
+	systemProperty 'spring.profiles.active', 'dev'
 	main = 'com.nixmash.springdata.solr.SolrLauncher'
 }
+
+
+
+
 
 
 

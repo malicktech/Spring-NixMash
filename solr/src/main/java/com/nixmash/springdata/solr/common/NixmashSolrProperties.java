@@ -5,9 +5,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@PropertySource("file:/home/daveburke/web/nixmashspring/solr.properties")
-@ConfigurationProperties(prefix="solr")
-public class SolrSettings {
+//@PropertySource("file:/home/daveburke/web/nixmashspring/solr.properties")
+@ConfigurationProperties(prefix="nixmashsolr", ignoreInvalidFields = false, ignoreUnknownFields = true, ignoreNestedProperties = false)
+public class NixmashSolrProperties {
 
 	private String solrServerUrl;
 	private String solrEmbeddedPath;
@@ -27,5 +27,5 @@ public class SolrSettings {
 	public void setSolrEmbeddedPath(String solrEmbeddedPath) {
 		this.solrEmbeddedPath = solrEmbeddedPath;
 	}
-	
+
 }

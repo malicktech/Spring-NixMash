@@ -35,15 +35,7 @@ import org.springframework.data.solr.repository.SolrCrudRepository;
 import com.nixmash.springdata.solr.model.IProduct;
 import com.nixmash.springdata.solr.model.Product;
 
-/**
- * 
- * NixMash Spring Notes: ---------------------------------------------------
- * 
- * Based on Christoph Strobl's Spring Solr Repository Example for Spring Boot
- * 
- * On GitHub: https://goo.gl/JoAYaT
- * 
- */
+
 public interface CustomProductRepository extends CustomBaseRepository, SolrCrudRepository<Product, String> {
 
 	Page<Product> findByPopularityGreaterThanEqual(Integer popularity, Pageable page);
@@ -77,7 +69,7 @@ public interface CustomProductRepository extends CustomBaseRepository, SolrCrudR
 
 	@Query("doctype:product")
 	public Page<Product> findAllProductsPaged(Pageable page);
-	
+
 	@Query(value = "*:*", filters = { "doctype:product" })
 	@Facet(fields = IProduct.CATEGORY_FIELD, limit = 6)
 	public FacetPage<Product> findProductCategoryFacets(Pageable page);
@@ -87,17 +79,17 @@ public interface CustomProductRepository extends CustomBaseRepository, SolrCrudR
 	public FacetPage<Product> findByNameStartingWith(Collection<String> nameFragments, Pageable pageable);
 
 	public List<Product> findByLocationWithin(Point location, Distance distance);
-	
+
 	public List<Product> findByLocationNear(Point location, Distance distance);
-	
+
 	public List<Product> findByLocationNear(Box bbox);
-	
+
 	@Query("{!geofilt pt=?0 sfield=store d=?1}")
 	public List<Product> findByLocationSomewhereNear(Point location, Distance distance);
-	
+
 	@Highlight(prefix = "<b>", postfix = "</b>")
 	@Query(fields = { IProduct.ID_FIELD, IProduct.NAME_FIELD,
 			IProduct.FEATURE_FIELD, IProduct.CATEGORY_FIELD , IProduct.POPULARITY_FIELD, IProduct.LOCATION_FIELD}, defaultOperator = Operator.AND)
 	public HighlightPage<Product> findByNameIn(Collection<String> names, Pageable page);
-	
+
 }

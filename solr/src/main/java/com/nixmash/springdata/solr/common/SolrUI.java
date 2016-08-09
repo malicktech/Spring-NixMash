@@ -30,22 +30,22 @@ public class SolrUI {
 	private ProductService service;
 
 	@Autowired
-	private SolrSettings solrSettings;
+	private NixmashSolrProperties nixmashSolrProperties;
 
 	private Page<Product> productListPage;
 	private HighlightPage<Product> highlightProductPage;
 	private List<Product> productList;
 	private FacetPage<Product> facetProductPage;
 	private Iterable<Product> productIterable;
-	
+
 	// @formatter:off
-	
+
 	private enum DEMO {
-		ALL_PRODUCTS, 
-		NAMED_QUERY, 
-		UPDATE_RECORD, 
-		METHOD_NAME_QUERY, 
-		AVAILABLE_PRODUCTS, 
+		ALL_PRODUCTS,
+		NAMED_QUERY,
+		UPDATE_RECORD,
+		METHOD_NAME_QUERY,
+		AVAILABLE_PRODUCTS,
 		ALL_RECORDS,
 		TEST_RECORDS,
 		CRITERIA_SEARCH,
@@ -54,7 +54,7 @@ public class SolrUI {
 		FACET_ON_CATEGORY,
 		FACET_ON_NAME,
 		SIMPLE_QUERY,
-		HIGHLIGHT_SEARCH, 
+		HIGHLIGHT_SEARCH,
 		HIGHLIGHT_SEARCH_CRITERIA,
 		BY_LOCATION
 	};
@@ -66,9 +66,9 @@ public class SolrUI {
 
 		String[] profiles = environment.getActiveProfiles();
 		if (profiles[0].equals("dev"))
-			System.out.println("DEVELOPMENT mode: Embedded SOLR Home: " + solrSettings.getSolrEmbeddedPath());
+			System.out.println("DEVELOPMENT mode: Embedded SOLR Home: " + nixmashSolrProperties.getSolrEmbeddedPath());
 		else
-			System.out.println("PRODUCTION mode: SOLR Server Url: " + solrSettings.getSolrServerUrl());
+			System.out.println("PRODUCTION mode: SOLR Server Url: " + nixmashSolrProperties.getSolrServerUrl());
 		System.out.println("Running Demo: " + demo.name() + "\n");
 
 		runDemos(demo);
@@ -86,7 +86,7 @@ public class SolrUI {
 			}
 			printProducts(productList);
 			break;
-			
+
 		case HIGHLIGHT_SEARCH_CRITERIA:
 			highlightProductPage = service.findByHighlightedNameCriteria("canon powershot");
 			SolrUtils.processHighlights(highlightProductPage);

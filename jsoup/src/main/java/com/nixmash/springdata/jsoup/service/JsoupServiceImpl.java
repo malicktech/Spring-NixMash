@@ -1,6 +1,7 @@
 package com.nixmash.springdata.jsoup.service;
 
 import com.nixmash.springdata.jsoup.base.JsoupHtmlParser;
+import com.nixmash.springdata.jsoup.config.NixmashJsoupProperties;
 import com.nixmash.springdata.jsoup.dto.PagePreviewDTO;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,11 +19,15 @@ import java.io.IOException;
 @Transactional
 public class JsoupServiceImpl implements JsoupService {
 
-    private static final Logger logger =
-            LoggerFactory.getLogger(JsoupServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(JsoupServiceImpl.class);
 
+    @Autowired
+    private NixmashJsoupProperties nixmashJsoupProperties;
+
+    /*
     @Value("${jsoup.connect.useragent}")
     private String userAgent;
+    */
 
     @Autowired
     @Qualifier("pagePreviewParser")
@@ -57,7 +62,7 @@ public class JsoupServiceImpl implements JsoupService {
     private Document getDocument(String url, Boolean validateCert)
             throws IOException {
         return  Jsoup.connect(url)
-                .userAgent(userAgent)
+                .userAgent(nixmashJsoupProperties.getConnect().getUseragent())
                 .timeout(12000)
                 .referrer("http://www.google.com")
                 .followRedirects(true)

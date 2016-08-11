@@ -1,4 +1,4 @@
-package com.nixmash.springdata.solr.config;
+package com.nixmash.springdata.jsoup.config;
 
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -13,13 +13,13 @@ import org.springframework.core.io.ClassPathResource;
  */
 @Configuration
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class SolrPropertySourcePlaceholderConfig {
+public class JsoupPropertySourcePlaceholderConfig {
 
     @Bean
-    public static PropertySourcesPlaceholderConfigurer solrProperties() {
+    public static PropertySourcesPlaceholderConfigurer jsoupProperties() {
         PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
         YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();
-        yaml.setResources(new ClassPathResource("config/solr_application.yml"));
+        yaml.setResources(new ClassPathResource("config/jsoup_application.yml"));
         propertySourcesPlaceholderConfigurer.setProperties(yaml.getObject());
         return propertySourcesPlaceholderConfigurer;
     }

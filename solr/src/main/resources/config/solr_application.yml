@@ -2,8 +2,8 @@
 # Packages
 package.root: com.nixmash.springdata.solr
 
-spring:
-    profiles.active: dev
+#spring:
+ #   profiles.active: dev
 
 ---
 
@@ -11,9 +11,8 @@ spring:
     # PROFILES
     profiles: dev
     # Solr Properties bind with FILE DEFINED in Solr/Common/NixmashSolrProperties.java
-nixmashsolr:
-    solrServerUrl: http://localhost:8983/solr/#/collection1
-    solrEmbeddedPath: C:\DevLabs\Workspace-mars\Spring-NixMash\install\solr\embedded
+nixmashsolr.solrServerUrl= http://localhost:8983/solr/#/collection2
+nixmashsolr.solrEmbeddedPath= C:\DevLabs\Workspace-mars\Spring-NixMash\install\solr\embedded
 ---
 
 spring:
@@ -21,27 +20,12 @@ spring:
     profiles: prod
     # Solr Properties bind with FILE DEFINED in Solr/Common/NixmashSolrProperties.java
 nixmashsolr:
-    solrServerUrl: http://localhost:8983/solr/#/collection1
+    solrServerUrl: http://localhost:8983/solr/#/collection3
     solrEmbeddedPath: C:\DevLabs\Workspace-mars\Spring-NixMash\install\solr\embedded
 
 ---
 
-# Default spring BOOT sorlServer Properties
-#spring:
-#    data:
-#        solr:
-#            host: http://127.0.0.1:8983/solr # Solr host. Ignored if "zk-host" is set.
-#            repositories.enabled: true # Enable Solr repositories.
-#            zk-host: # ZooKeeper host address in the form HOST:PORT.
 
-
-# Default spring BOOT sorlServer Properties
-#spring:
-#    data:
-#        solr:
-#            host: http://127.0.0.1:8983/solr # Solr host. Ignored if "zk-host" is set.
-#            repositories.enabled: true # Enable Solr repositories.
-#            zk-host: # ZooKeeper host address in the form HOST:PORT.
 
 
 

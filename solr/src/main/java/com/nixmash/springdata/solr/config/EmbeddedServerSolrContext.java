@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.server.support.EmbeddedSolrServerFactoryBean;
@@ -16,6 +18,7 @@ import javax.annotation.Resource;
 
 @Configuration
 @Profile(Constants.SPRING_PROFILE_DEVELOPMENT)
+@PropertySource("classpath:config/solr_application_dev.properties")
 public class EmbeddedServerSolrContext {
 
 

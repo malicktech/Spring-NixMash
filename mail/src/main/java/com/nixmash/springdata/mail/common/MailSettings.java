@@ -5,8 +5,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@PropertySource("file:/home/daveburke/web/nixmashspring/mail.properties")
-@ConfigurationProperties(prefix = "mail")
+@PropertySource("file:C:/DevLabs/Workspace-mars/Spring-NixMash/install/samples/mail.properties")
+@ConfigurationProperties(prefix = "nixmashmail")
 public class MailSettings {
 
 	private String serverHost;

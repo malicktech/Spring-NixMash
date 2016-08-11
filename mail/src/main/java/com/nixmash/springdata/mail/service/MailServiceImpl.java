@@ -1,5 +1,6 @@
 package com.nixmash.springdata.mail.service;
 
+import com.nixmash.springdata.mail.common.MailProperties;
 import com.nixmash.springdata.mail.common.MailSettings;
 import com.nixmash.springdata.mail.components.MailSender;
 import com.nixmash.springdata.mail.dto.MailDTO;
@@ -27,8 +28,9 @@ import java.util.Map;
 public class MailServiceImpl implements MailService{
 
     private static final Logger logger = LoggerFactory.getLogger(MailServiceImpl.class);
-    private static final String CONTACT_EMAIL_SUBJECT = "mail.contact.subject";
-    private static final java.lang.String CONTACT_EMAIL_GREETING = "mail.contact.greeting";
+
+    // private static final String CONTACT_EMAIL_SUBJECT = "mail.contact.subject";
+    // private static final String CONTACT_EMAIL_GREETING = "mail.contact.greeting";
 
     final private MailSender mailSender;
     final private MailSettings mailSettings;
@@ -37,9 +39,11 @@ public class MailServiceImpl implements MailService{
     @Autowired
     Environment environment;
 
-    @Value("${mail.contact.body.type}")
-    private MailDTO.Type mailType;
+    @Autowired
+    MailProperties mailProperties;
 
+    // @Value("${nixmashmail.contact.body.type}")
+    // private MailDTO.Type mailType;
 
     @Autowired
     public MailServiceImpl(MailSender mailSender,
@@ -66,16 +70,20 @@ public class MailServiceImpl implements MailService{
                         message.addCc(mailSettings.getContactCC());
                     }
 
-                    String subject = environment.getProperty(CONTACT_EMAIL_SUBJECT);
+                    // String subject = environment.getProperty(CONTACT_EMAIL_SUBJECT);
+                    String subject = mailProperties.getContact().getSubject();
                     message.setSubject(MessageFormat.format(subject, mailDTO.getFromName()));
 
                     String body = mailDTO.getBody();
-                    String greeting = environment.getProperty(CONTACT_EMAIL_GREETING);
-                    String applicationPropertyUrl = environment.getProperty("spring.social.application.url");
-                    String siteName = environment.getProperty("mail.contact.site.name");
+                    // String greeting = environment.getProperty(CONTACT_EMAIL_GREETING);
+                    String greeting = mailProperties.getContact().getGreeting();
+                    String applicationPropertyUrl = environment.getProperty("mintster.spring.social.application.url");
+                    //String siteName = environment.getProperty("mail.contact.site.name");
+                    String siteName = mailProperties.getContact().getSite().getName();
 
                     // endregion
 
+                    MailDTO.Type mailType = MailDTO.Type.valueOf(mailProperties.getContact().getBody().getType());
                     switch (mailType) {
                         case HTML:
                             StringWriter w = new StringWriter();

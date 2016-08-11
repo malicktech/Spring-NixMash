@@ -6,7 +6,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-@SpringBootApplication
+// Uncomment to test Mail module
+// @SpringBootApplication // same as @Configuration @EnableAutoConfiguration @ComponentScan
 public class MailLauncher {
 
 	public static void main(String[] args) {

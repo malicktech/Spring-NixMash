@@ -24,10 +24,14 @@ public class MailSender extends JavaMailSenderImpl {
     }
 
     @Override
-    public String getUsername() { return  mailSettings.getServerUsername(); }
+    public String getUsername() {
+        return mailSettings.getServerUsername();
+    }
 
     @Override
-    public String getPassword() { return mailSettings.getServerPassword(); }
+    public String getPassword() {
+        return mailSettings.getServerPassword();
+    }
 
     @Override
     public Properties getJavaMailProperties() {
@@ -35,6 +39,6 @@ public class MailSender extends JavaMailSenderImpl {
         properties.setProperty("mail.smtp.auth", mailSettings.getSmtpAuth().toString());
         properties.setProperty("mail.smtp.starttls.enable", mailSettings.getSmtpStartTlsEnable().toString());
         return properties;
-        }
+    }
 
 }

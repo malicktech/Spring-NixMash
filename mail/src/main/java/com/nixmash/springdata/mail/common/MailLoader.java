@@ -17,7 +17,7 @@ public class MailLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        String applicationVersion = environment.getProperty("nixmash.spring.mail.version");
-        logger.info(String.format("NixMash Spring Mail Application Version: %s", applicationVersion));
+        String applicationVersion = environment.getProperty("mintster.nixmash.spring.mail.version");
+        logger.info("NixMash Spring Mail Application Version: {}", applicationVersion);
     }
 }

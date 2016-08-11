@@ -46,7 +46,7 @@ public class CacheConfiguration {
     }
 
     @Bean
-    public CacheManager cacheManager(NixmashProperties nixmashProperties) {
+    public CacheManager cacheManager(NixmashJpaProperties nixmashProperties) {
         log.debug("Starting Ehcache");
         cacheManager = net.sf.ehcache.CacheManager.create();
         cacheManager.getConfiguration().setMaxBytesLocalHeap(nixmashProperties.getCache().getEhcache().getMaxBytesLocalHeap());

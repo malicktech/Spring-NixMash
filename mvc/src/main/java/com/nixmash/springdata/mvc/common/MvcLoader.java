@@ -25,18 +25,18 @@ public class MvcLoader implements CommandLineRunner {
         }
 
         sb = sb.length() == 0 ? sb.append("No Options Specified") : sb;
-        logger.info(String.format("App launched with following arguments: %s", sb.toString()));
+        logger.info("App launched with following arguments: {}", sb.toString());
 
         PropertySource<?> ps = new SimpleCommandLinePropertySource(args);
         String appUrl = (String) ps.getProperty("appurl");
 
-        logger.info(String.format("Command-line appurl is %s", appUrl));
+        logger.info("Command-line appurl is {}", appUrl);
 
         String applicationPropertyUrl = environment.getProperty("spring.social.application.url");
-        logger.info(String.format("Current Spring Social ApplicationUrl is %s", applicationPropertyUrl));
+        logger.info("Current Spring Social ApplicationUrl is {}", applicationPropertyUrl);
 
         String applicationVersion = environment.getProperty("web.site.version");
-        logger.info(String.format("NixMash MVC Application Version: %s", applicationVersion));
+        logger.info("NixMash MVC Application Version: {}", applicationVersion);
 
     }
 }

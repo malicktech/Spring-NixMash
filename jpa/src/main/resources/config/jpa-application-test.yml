@@ -1,0 +1,8 @@
+# ===================================================================
+# Spring Boot configuration for the "Test" profile.
+#
+# This configuration overrides the jpa-application.yml file.
+# ===================================================================
+
+spring:
+    profiles: test

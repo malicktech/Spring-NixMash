@@ -26,15 +26,11 @@ public final class RssPostFeedView extends AbstractRssFeedView {
 
     private static final int NUMBER_OF_ITEMS = 10;
 
+    @Autowired
     private PostService postService;
-    private ApplicationSettings applicationSettings;
 
     @Autowired
-    public RssPostFeedView(PostService postService,
-                           ApplicationSettings applicationSettings) {
-        this.postService = postService;
-        this.applicationSettings = applicationSettings;
-    }
+    private ApplicationSettings applicationSettings;
 
     @Override
     protected Channel newFeed() {

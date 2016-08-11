@@ -1,13 +1,14 @@
 # ===================================================================
-# Spring Boot configuration for the "mysql" profile.
+# Spring Boot configuration for the "production" profile.
 #
+# This configuration overrides the jpa-application.yml file.
 # ===================================================================
 
-
 spring:
+    profiles: prod
 
     datasource:
-        driver-class-name: com.mysql.jdbc.jdbc2.optional.MysqlDataSource # com.mysql.jdbc.Driver
+        driver-class-name: com.mysql.jdbc.Driver
         url: jdbc:mysql://localhost:3306/dev_nixmashspring?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: admin
         password: admin
@@ -21,3 +22,5 @@ spring:
                 #dialect: org.hibernate.dialect.H2Dialect
                 connection.charSet: UTF-8
                 hbm2ddl.import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+
+

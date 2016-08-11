@@ -8,14 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.nixmash.springdata.jpa.enums.DataConfigProfile;
-import com.nixmash.springdata.mvc.common.Application;
-import com.nixmash.springdata.solr.enums.SolrConfigProfile;
+import com.nixmash.springdata.solr.enums.Constants;
 
 @SuppressWarnings("deprecation")
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @Transactional
-@ActiveProfiles({ DataConfigProfile.SPRING_PROFILE_H2, SolrConfigProfile.DEV })
+@ActiveProfiles({ DataConfigProfile.SPRING_PROFILE_H2, Constants.DEV })
 public class AbstractContext {
 
 	@Autowired

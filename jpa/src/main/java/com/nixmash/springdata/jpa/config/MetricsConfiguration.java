@@ -40,7 +40,7 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
     private HealthCheckRegistry healthCheckRegistry = new HealthCheckRegistry();
 
     @Inject
-    private NixmashProperties nixmashProperties;
+    private NixmashJpaProperties nixmashProperties;
 
     @Override
     @Bean
@@ -89,7 +89,7 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
         private MetricRegistry metricRegistry;
 
         @Inject
-        private NixmashProperties nixmashProperties;
+        private NixmashJpaProperties nixmashProperties;
 
         @PostConstruct
         private void init() {
@@ -119,7 +119,7 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
         private MetricRegistry metricRegistry;
 
         @Inject
-        private NixmashProperties nixmashProperties;
+        private NixmashJpaProperties nixmashProperties;
 
         @PostConstruct
         private void init() {

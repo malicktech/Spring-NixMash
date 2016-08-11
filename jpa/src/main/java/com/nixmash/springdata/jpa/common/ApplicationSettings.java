@@ -11,45 +11,30 @@ import org.springframework.stereotype.Component;
  * Properties are configured in file named  external.properties .
  * </p>
  */
-@Component
-@ConfigurationProperties(prefix = "external", ignoreInvalidFields = false, ignoreUnknownFields = false, ignoreNestedProperties = false)
-// External properties : to uncomment if external file is use
-// @PropertySource("file:C:/DevLabs/FileRepo/Spring-NixMash/external.properties")
+@ConfigurationProperties(prefix = "external", ignoreUnknownFields = false)
 public class ApplicationSettings {
 
-    private Boolean isDemoSite;
+    private boolean isDemoSite;
     private String baseUrl;
-
-    //region Social Properties
-
-    private String twitterAppId;
-    private String twitterAppSecret;
+    // RSS Properties
+    private String rssChannelTitle;
+    private String rssChannelDescription;
+    // Social Properties
     private String facebookAppId;
     private String facebookAppSecret;
+    private String twitterAppId;
+    private String twitterAppSecret;
     private String googleAppId;
     private String googleAppSecret;
     private String googleMapKey;
-
-    //endregion
-
-    // region User Profile Image Properties
-
+    // User Profile Image Properties
     private String profileImagePath;
     private String profileImageUrlRoot;
-
     private String profileIconPath;
     private String profileIconUrlRoot;
-
     private String editorImagePlacemarker;
 
-    // endregion
-
-    //region RSS Properties
-
-    private String rssChannelTitle;
-    private String rssChannelDescription;
-
-    //endregion
+    // =====================================================================
 
     public String getEditorImagePlacemarker() {
         return editorImagePlacemarker;
@@ -115,11 +100,11 @@ public class ApplicationSettings {
         this.facebookAppSecret = facebookAppSecret;
     }
 
-    public Boolean getIsDemoSite() {
+    public boolean getIsDemoSite() {
         return isDemoSite;
     }
 
-    public void setIsDemoSite(Boolean isDemoSite) {
+    public void setIsDemoSite(boolean isDemoSite) {
         this.isDemoSite = isDemoSite;
     }
 

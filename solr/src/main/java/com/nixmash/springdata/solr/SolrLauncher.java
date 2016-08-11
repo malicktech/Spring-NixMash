@@ -1,34 +1,18 @@
 package com.nixmash.springdata.solr;
 
-import com.nixmash.springdata.solr.common.NixmashSolrProperties;
-import com.nixmash.springdata.solr.config.DefaultProfileUtil;
 import com.nixmash.springdata.solr.enums.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootVersion;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.context.embedded.MimeMappings;
-import org.springframework.boot.context.embedded.ServletContextInitializer;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.SpringVersion;
 
 import com.nixmash.springdata.solr.common.SolrUI;
-import com.nixmash.springdata.solr.config.SolrConfig;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import javax.servlet.DispatcherType;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
@@ -69,8 +53,6 @@ public class SolrLauncher {
      */
 	public static void main(String[] args) throws UnknownHostException {
         SpringApplication app = new SpringApplication(SolrLauncher.class);
-
-        DefaultProfileUtil.addDefaultProfile(app);
 
         ApplicationContext ctx = app.run(args);
         Environment env = ctx.getEnvironment();

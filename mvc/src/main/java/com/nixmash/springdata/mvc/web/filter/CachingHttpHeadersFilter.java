@@ -1,7 +1,7 @@
 package com.nixmash.springdata.mvc.web.filter;
 
 
-import com.nixmash.springdata.jpa.config.NixmashProperties;
+import com.nixmash.springdata.jpa.config.NixmashJpaProperties;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
@@ -20,9 +20,9 @@ public class CachingHttpHeadersFilter implements Filter {
 
     private long CACHE_TIME_TO_LIVE = TimeUnit.DAYS.toMillis(1461L);
 
-    private NixmashProperties nixmashProperties;
+    private NixmashJpaProperties nixmashProperties;
 
-    public CachingHttpHeadersFilter(NixmashProperties nixmashProperties) {
+    public CachingHttpHeadersFilter(NixmashJpaProperties nixmashProperties) {
         this.nixmashProperties = nixmashProperties;
     }
 

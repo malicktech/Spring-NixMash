@@ -1,0 +1,77 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overriden by the Spring profile you use,
+# for example jpa-application-dev.yml if you use the "dev" profile.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+# EMBEDDED SERVER CONFIGURATION
+server:
+    port: 9000 # Server HTTP port.
+
+# MANAGEMENT HTTP SERVER
+management:
+    context-path: /management # Management endpoint context-path. For instance `/actuator`
+    health:
+        mail:
+            enabled: false # Enable Mail health check : When using the MailService, configure an SMTP server and set this to true
+
+
+# Spring AUTOCONFIG
+spring:
+    application:
+        name: jhipsterSampleApplication
+    profiles:
+        # The commented value for `active` can be replaced with valid spring profiles to load.
+        # Otherwise, it will be filled in by maven when building the WAR file
+        # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
+        active: #spring.profiles.active#
+
+
+    # INTERNATIONALIZATION
+    messages:
+        basename: i18n/messages # Comma-separated list of basenames, each following the ResourceBundle convention.
+        # use.code.as.default.message: true
+
+    # SPRING MVC
+    mvc:
+        favicon:
+            enabled: false
+
+    # THYMELEAF
+    # thymeleaf:
+        #mode: XHTML # XHTML or HTML5 Template mode to be applied to templates.
+
+    # VELOCITY TEMPLATES
+    #velocity:
+        #check-template-location: false
+        #resource-loader-path: classpath:/velocity/
+
+# MULTIPART Upload
+multipart:
+    enabled: true
+    file-size-threshold: 0
+    location: /tmp/
+    max-file-size: 5Mb
+    max-request-size: 20Mb
+
+
+# ===================================================================
+# MisTash MVC specific properties
+# ===================================================================
+
+web.site.version: NixMash Spring v0.3.4
+
+# Mail Services -- Duplicated in Mail Module application.properties
+
+#nixmash.spring.mail.version=v2.0.0
+#mail.contact.site.name=NixMash Spring
+#mail.contact.subject=New Contact Email from {0}
+#mail.contact.body.type=HTML
+#mail.contact.greeting=Hi Dave, you have a new Contact Message!

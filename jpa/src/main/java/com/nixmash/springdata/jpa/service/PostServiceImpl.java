@@ -30,23 +30,17 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * Created by daveburke on 6/1/16.
- */
 @Service("postService")
 @Transactional
 public class PostServiceImpl implements PostService {
 
     private static final Logger logger = LoggerFactory.getLogger(PostServiceImpl.class);
 
+    @Autowired
     private PostRepository postRepository;
-    private TagRepository tagRepository;
 
     @Autowired
-    public PostServiceImpl(PostRepository postRepository, TagRepository tagRepository) {
-        this.postRepository = postRepository;
-        this.tagRepository = tagRepository;
-    }
+    private TagRepository tagRepository;
 
     @PersistenceContext
     private EntityManager em;

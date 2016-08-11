@@ -1,5 +1,11 @@
+
+description = 'NixMash JPA Module'
+
+
 jar {
+    // attributes added to the manifest file
     manifest {
+        // Main Class of a Jar File
         attributes 'Main-Class': 'com.nixmash.springdata.jpa.JpaLauncher'
     }
 }
@@ -17,6 +23,11 @@ sourceSets {
 configurations {
     compile.exclude module: 'org.slf4j'
 }
+
+/*
+bootRepackage {
+}
+*/
 
 springBoot {
     mainClass = 'com.nixmash.springdata.jpa.JpaLauncher'
@@ -39,16 +50,18 @@ task showHome << {
 }
 
 task production << {
-    bootRun.systemProperty 'spring.profiles.active', 'mysql'
+    bootRun.systemProperty 'spring.profiles.active', 'dev'
 }
 
 bootRun {
     addResources = false
-    systemProperty 'spring.profiles.active', 'mysql'
+    systemProperty 'spring.profiles.active', 'dev'
     main = 'com.nixmash.springdata.jpa.JpaLauncher'
 }
 
+/*
 task rmTestdb(type: Exec) {
     commandLine "bash", "${rootDir}/doc/scripts/rmTestdb.sh"
 }
+*/
 

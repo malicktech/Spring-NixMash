@@ -1,12 +1,24 @@
+apply plugin: 'war'
+
+description = 'NixMash mvc Module'
+
 war {
 	baseName = 'nixmashSpring'
-	version =  '0.0.1'
+
+    manifest {
+        attributes 'Main-Class': 'com.nixmash.springdata.mvc.Application'
+    }
 
     /*   to exclude from a 'war' archive
    Any exclude specified on the rootSpec will automatically apply files copied into the war file, including 'WEB-INF'.*/
     rootSpec.exclude("**/tomcat-*.jar")
-
 }
+
+configurations {
+    all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    providedRuntime
+}
+
 
 sourceSets {
 	main {
@@ -16,31 +28,41 @@ sourceSets {
 	test { java.srcDir 'src/test/java' }
 }
 
-configurations { providedRuntime }
-
 dependencies {
 
-	compile project(':jpa')
-	compile project(':solr')
-	compile project(':mail')
-	compile project(':jsoup')
+    // Sub project Module dependency
+	compile project(':jpa'), project(':solr'), project(':mail'), project(':jsoup')
 
+    // Web : Support for full-stack web development, including spring-webmvc and Tomcat (as an embedded container by default)
 	compile 'org.springframework.boot:spring-boot-starter-web'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	
+    compile "org.springframework.boot:spring-boot-starter-websocket"
 
+
+    // Import Tomcat Spring Boot’s default HTTP engine
+    // Already added in profile_x.gradle
+    // providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
+    // Thymeleaf templating engine, including integration with Spring
+	// provide : thymeleaf-spring4 + thymeleaf-layout-dialect
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE' // TODO to check f already provide by starter-thymeleaf or starter-security ?
+    /* compile 'org.thymeleaf:thymeleaf-spring4:2.1.4.RELEASE' */ // TODO to delete
+    compile 'com.github.dandelion:datatables-thymeleaf:1.1.0'
+
+    // Social | FaceBook
 	compile 'org.springframework.boot:spring-boot-starter-social-twitter'
 	compile 'org.springframework.boot:spring-boot-starter-social-facebook'
-	compile 'org.springframework.social:spring-social-security:1.1.4.RELEASE'
-	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	compile 'org.springframework.social:spring-social-google:1.0.0.RELEASE'
+    compile 'org.springframework.social:spring-social-google:1.0.0.RELEASE'
 
-	compile 'com.jayway.restassured:json-path:2.4.1'
+	compile 'org.springframework.social:spring-social-security:1.1.4.RELEASE'
+
+    compile "org.springframework.boot:spring-boot-starter-security"
+
+    compile 'com.jayway.restassured:json-path:2.4.1'
 	compile 'com.jayway.jsonpath:json-path-assert:2.0.0'
 
-	compile 'org.thymeleaf:thymeleaf-spring4:2.1.4.RELEASE'
-	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE'
-	compile 'com.github.dandelion:datatables-thymeleaf:1.1.0'
-
+    // Webjars
 	compile 'org.webjars:webjars-locator:0.27'
 	compile 'org.webjars:webjars-locator-core:0.27'
 	compile 'org.webjars:jquery:2.1.4'
@@ -73,8 +95,25 @@ bootRun {
 	systemProperty 'spring.profiles.active', 'dev, mysql'
 	args "--appurl=http://localhost:9000"
 	main = 'com.nixmash.springdata.mvc.common.Application'
+}
 
+/* http://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-gradle-plugin.html#build-tool-plugins-gradle-repackage-configuration */
+bootRepackage {
+    //enabled = false
+    mainClass = 'com.nixmash.springdata.mvc.Application'
+}
+
+springBoot {
+    mainClass = 'com.nixmash.springdata.mvc.Application'
+    executable = true
 
 }
+
+
+task stage(dependsOn: 'bootRepackage') {
+}
+
+compileJava.dependsOn processResources
+processResources.dependsOn cleanResources
 
 

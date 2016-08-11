@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.ApplicationContextException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,6 +42,7 @@ import java.util.Arrays;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "com.nixmash.springdata.jpa")
+@EntityScan("com.nixmash.springdata.jpa.model")
 @EnableJpaAuditing(dateTimeProviderRef = "dateTimeProvider")
 @EnableSpringDataWebSupport
 public class DatabaseConfiguration {
@@ -101,8 +103,6 @@ public class DatabaseConfiguration {
 
     // ==============================================
 
-    @Value("#{ environment['entity.package'] }")
-    private String entityPackage;
     @Bean
     AuditorAware<String> auditorProvider() {
         return new UsernameAuditorAware();
@@ -125,14 +125,21 @@ public class DatabaseConfiguration {
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
         populator.setContinueOnError(true);
         populator.setIgnoreFailedDrops(true);
-        populator.addScripts(new ClassPathResource("/db/h2schema.sql"),
-            new ClassPathResource("/db/h2data.sql"));
+        populator.addScripts(new ClassPathResource("db/h2schema.sql"),
+            new ClassPathResource("db/h2data.sql"));
         try {
             populator.populate(dataSource.getConnection());
         } catch (SQLException ignored) {
         }
         return populator;
     }
+
+    @Bean
+    @Profile(DataConfigProfile.SPRING_PROFILE_MYSQL)
+    public DatabasePopulator databasePopulator() {
+        return null;
+    }
+
     // ==============================================
 
 

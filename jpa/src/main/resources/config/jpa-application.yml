@@ -1,0 +1,80 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overriden by the Spring profile you use,
+# for example jpa-application-dev.yml if you use the "dev" profile.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+
+spring:
+    application:
+        name: MixTash
+    profiles:
+        # list of active profiles
+        # The commented value for `active` can be replaced with valid spring profiles to load.
+        # Otherwise, it will be filled in by maven when building the WAR file
+        # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
+        active: dev, h2 #spring.profiles.active#
+        #include: h2
+    jpa:
+        open-in-view: false # Register OpenEntityManagerInViewInterceptor. Binds a JPA EntityManager to the thread for the entire processing of the request.
+        # generate-ddl: false # (false)Initialize the schema on startup, not used if Hibernate autoconfig is active. see (http://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html)
+        hibernate:
+            naming-strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
+            # SpringNamingStrategy : column name in camelcase instead of lowercase separated by underscore
+            # org.hibernate.cfg.ImprovedNamingStrategy : prefers embedded underscores to mixed case names
+
+    # INTERNATIONALIZATION
+    messages:
+        basename: i18n/messages # Comma-separated list of basenames, each following the ResourceBundle convention.
+        encoding: UTF-8 # Message bundles encoding.
+
+
+    data:
+        title2: Create property
+
+security:
+    basic:
+        enabled: false
+
+# LOGGING
+logging:
+    level:
+        org.springframework: INFO
+        org.hibernate: OFF
+        org.thymeleaf: ERROR
+        com.nixmash.springdata: INFO
+
+
+
+# ===================================================================
+# MisTash specific properties
+# ===================================================================
+
+# Packages
+package:
+    root: com.nixmash.springdata.jpa
+entity:
+    package: com.nixmash.springdata.jpa.model
+
+# social
+#spring:
+    #social:
+        #application:
+            #url: ${appurl:http://localhost:9000}
+
+# maximum profile image size 3MB
+
+
+mintster:
+    profile.image.upload.size: 3145728
+    nixmash.spring.jpa.version: v3.0.0
+    github:
+        repo.url: https://api.github.com/repos/diop-malick/Spring-NixMash
+        user.url: https://api.github.com/users/diop-malick

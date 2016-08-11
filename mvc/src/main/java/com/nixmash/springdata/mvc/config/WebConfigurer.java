@@ -4,30 +4,21 @@ import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
 
-import com.nixmash.springdata.jpa.config.NixmashProperties;
+import com.nixmash.springdata.jpa.config.NixmashJpaProperties;
 import com.nixmash.springdata.jpa.enums.DataConfigProfile;
-import com.nixmash.springdata.mvc.web.filter.CachingHttpHeadersFilter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.MimeMappings;
 import org.springframework.boot.context.embedded.ServletContextInitializer;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
-import java.io.File;
-import java.nio.file.Paths;
 import java.util.*;
-import javax.inject.Inject;
 import javax.servlet.*;
 /**
  * Configuration of web application with Servlet 3.0 APIs.
@@ -39,11 +30,11 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
 
     private final Logger log = LoggerFactory.getLogger(WebConfigurer.class);
 
-    @Inject
+    @Autowired
     private Environment env;
 
-    @Inject
-    private NixmashProperties nixmashProperties;
+    @Autowired
+    private NixmashJpaProperties nixmashProperties;
 
     @Autowired(required = false)
     private MetricRegistry metricRegistry;
@@ -56,7 +47,8 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         EnumSet<DispatcherType> disps = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.ASYNC);
         initMetrics(servletContext, disps);
         if (env.acceptsProfiles(DataConfigProfile.SPRING_PROFILE_PRODUCTION)) {
-            initCachingHttpHeadersFilter(servletContext, disps);
+            // TODO - to check
+            // initCachingHttpHeadersFilter(servletContext, disps);
         }
         if (env.acceptsProfiles(DataConfigProfile.SPRING_PROFILE_DEVELOPMENT)) {
             initH2Console(servletContext);
@@ -77,9 +69,11 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         container.setMimeMappings(mappings);
 
         // When running in an IDE or with ./mvnw spring-boot:run, set location of the static web assets.
-        setLocationForStaticAssets(container);
+        // setLocationForStaticAssets(container);
     }
 
+    // TO DELETE : don't use src/webapp/ , SO no need to specify static folder
+    /*
     private void setLocationForStaticAssets(ConfigurableEmbeddedServletContainer container) {
         File root;
         String prefixPath = resolvePathPrefix();
@@ -91,11 +85,12 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         if (root.exists() && root.isDirectory()) {
             container.setDocumentRoot(root);
         }
-    }
+    */
 
     /**
      *  Resolve path prefix to static resources.
      */
+    /*
     private String resolvePathPrefix() {
         String fullExecutablePath = this.getClass().getResource("").getPath();
         String rootPath = Paths.get(".").toUri().normalize().getPath();
@@ -106,10 +101,12 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         }
         return extractedPath.substring(0, extractionEndIndex);
     }
+    */
 
     /**
      * Initializes the caching HTTP Headers Filter.
      */
+    /*
     private void initCachingHttpHeadersFilter(ServletContext servletContext,
                                               EnumSet<DispatcherType> disps) {
         log.debug("Registering Caching HTTP Headers Filter");
@@ -121,6 +118,7 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         cachingHttpHeadersFilter.addMappingForUrlPatterns(disps, true, "/app/*");
         cachingHttpHeadersFilter.setAsyncSupported(true);
     }
+    */
 
     /**
      * Initializes Metrics.

@@ -1,4 +1,16 @@
-apply plugin: 'spring-boot'
+
+// =======================================================================
+
+allprojects {
+    dependencies {
+    }
+}
+
+
+// =======================================================================
+
+subprojects {
+
 
 ext {
     logbackLoglevel = "DEBUG"
@@ -6,10 +18,11 @@ ext {
 
 dependencies {
     compile "org.springframework.boot:spring-boot-devtools"
-    compile "org.springframework.boot:spring-boot-starter-tomcat:${spring_boot_version}"
+    compile "org.springframework.boot:spring-boot-starter-tomcat"
 }
 
 def profiles = 'dev'
+
 if (project.hasProperty('no-swagger')) {
     profiles += ',no-swagger'
 }
@@ -24,10 +37,12 @@ processResources {
             it.replace('#logback.loglevel#', logbackLoglevel)
         }
     }
-    filesMatching('**/application.yml') {
+    filesMatching('**/jpa-application.properties') {
         filter {
             it.replace('#spring.profiles.active#', profiles)
         }
     }
+}
+
 }
 

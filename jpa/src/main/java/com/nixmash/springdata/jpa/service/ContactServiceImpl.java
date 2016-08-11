@@ -22,7 +22,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 //@Repository
-@Service("contactService")
+@Service
 @Transactional
 public class ContactServiceImpl implements ContactService {
     private static final Logger logger = LoggerFactory.getLogger(ContactService.class);

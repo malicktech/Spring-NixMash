@@ -18,12 +18,8 @@ import java.util.Map;
 @DependsOn("databasePopulator")
 public class SiteOptions {
 
-    private SiteOptionRepository siteOptionRepository;
-
     @Autowired
-    public SiteOptions(SiteOptionRepository siteOptionRepository) {
-        this.siteOptionRepository = siteOptionRepository;
-    }
+    private SiteOptionRepository siteOptionRepository;
 
     @PostConstruct
     public void init() throws

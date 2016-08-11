@@ -16,7 +16,11 @@
         </encoder>
     </appender>
 
-    <logger name="com.nixmash.springdata" level="info"/>
+    <!-- <logger name="com.nixmash.springdata" level="info"/> -->
+    <logger name="com.nixmash.springdata.mvc" level="info" />
+    <logger name="com.nixmash.springdata.jsoup" level="info" />
+    <logger name="com.nixmash.springdata.jpa" level="info" />
+    <logger name="com.nixmash.springdata.solr" level="info" />
 
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>
@@ -45,7 +49,6 @@
     <logger name="org.thymeleaf" level="off"/>
     <logger name="org.hibernate" level="off"/>
 
-    <!--<include resource="logJpaToFile.xml" />-->
 
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>

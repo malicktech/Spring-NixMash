@@ -1,17 +1,14 @@
 package com.nixmash.springdata.jpa;
 
-import com.nixmash.springdata.jpa.common.ApplicationSettings;
 import com.nixmash.springdata.jpa.components.JpaUI;
 import com.nixmash.springdata.jpa.config.DefaultProfileUtil;
-import com.nixmash.springdata.jpa.config.NixmashProperties;
 import com.nixmash.springdata.jpa.enums.DataConfigProfile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.SpringVersion;
 import org.springframework.core.env.Environment;
 
@@ -22,9 +19,11 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ * This project is meant to be included as a library, and is not intended to run as a standalone application
+ */
+// Uncomment to test Jpa module
 @SpringBootApplication // same as @Configuration @EnableAutoConfiguration @ComponentScan
-@EnableConfigurationProperties({NixmashProperties.class, ApplicationSettings.class})
-// Enable support for ConfigurationProperties annotated beans
 public class JpaLauncher {
 
     private static final Logger log = LoggerFactory.getLogger(JpaLauncher.class);
@@ -33,11 +32,10 @@ public class JpaLauncher {
     private Environment env;
 
     /**
-     * Initializes demo2.
+     * Initializes jpa Console app.
      * <p>
      * Spring profiles can be configured with a program arguments --spring.profiles.active=your-active-profile
      * <p>
-     * You can find more information on how profiles work with JHipster on <a href="http://jhipster.github.io/profiles/">http://jhipster.github.io/profiles/</a>.
      */
     @PostConstruct
     public void initApplication() {
@@ -64,22 +62,15 @@ public class JpaLauncher {
     public static void main(String[] args) throws UnknownHostException {
 
         SpringApplication app = new SpringApplication(JpaLauncher.class);
-        // ApplicationContext ctx = SpringApplication.run(Application.class, args);
         // ... customize app settings here
-        DefaultProfileUtil.addDefaultProfile(app);
-
+        DefaultProfileUtil.addDefaultProfile(app, "/config/jpa-application.properties");
         // ... run app -> Run the Spring application, creating and refreshing a new ApplicationContext
-        ApplicationContext ctx = app.run(args);
+        // ApplicationContext ctx = app.run(args);
+        ConfigurableApplicationContext ctx = app.run(args);
         // get environment for log properties
         Environment env = ctx.getEnvironment();
-        // start jpa console
-        JpaUI ui = ctx.getBean(JpaUI.class);
-        ui.init();
 
-        // exit a SpringApplication with the context to close
-        //ctx.close();
-        SpringApplication.exit(ctx);
-
+        // Log
         log.info("\n----------------------------------------------------------\n\t" +
                 "Spring Framework Version : '{}' :\n\t" +
                 "Spring Boot Version : '{}' :\n\t" +
@@ -92,6 +83,14 @@ public class JpaLauncher {
             env.getProperty("server.port"),
             InetAddress.getLocalHost().getHostAddress(),
             env.getProperty("server.port"));
+
+        // start jpa console
+        JpaUI ui = ctx.getBean(JpaUI.class);
+        ui.init();
+        // exit a SpringApplication with the context to close
+        ctx.close();
+
+
     }
 
 }

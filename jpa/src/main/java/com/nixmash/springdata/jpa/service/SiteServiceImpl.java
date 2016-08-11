@@ -13,20 +13,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Service("siteService")
+@Service
 @Transactional
 public class SiteServiceImpl implements SiteService {
 
     private static final Logger logger = LoggerFactory.getLogger(SiteServiceImpl.class);
 
+    @Autowired
     private SiteOptionRepository siteOptionRepository;
-    private SiteOptions siteOptions;
 
     @Autowired
-    public SiteServiceImpl(SiteOptionRepository siteOptionRepository, SiteOptions siteOptions) {
-        this.siteOptionRepository = siteOptionRepository;
-        this.siteOptions = siteOptions;
-    }
+    private SiteOptions siteOptions;
+
 
     @Override
     public SiteOption update(SiteOptionDTO siteOptionDTO) throws SiteOptionNotFoundException {

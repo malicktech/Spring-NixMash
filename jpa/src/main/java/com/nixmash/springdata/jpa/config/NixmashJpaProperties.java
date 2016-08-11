@@ -5,18 +5,19 @@ package com.nixmash.springdata.jpa.config;
  */
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * Properties specific to JHipster.
  * <p>
  * <p>
- * Properties are configured in the application.yml file.
+ * Properties are configured in the jpa-application.yml file.
  * </p>
  *
  * @author Malick on 20/07/2016.
  */
 @ConfigurationProperties(prefix = "nixmash", ignoreUnknownFields = false)
-public class NixmashProperties {
+public class NixmashJpaProperties {
 
     /* Keys Fields */
 

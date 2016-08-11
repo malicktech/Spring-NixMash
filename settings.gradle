@@ -1,2 +1,3 @@
+//the “settings.gradle” file includes all sub modules.
 include "jpa", "mvc", "solr", "mail", "jsoup"
 

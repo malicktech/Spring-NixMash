@@ -32,13 +32,23 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-    private final UserRepository userRepository;
-    private final AuthorityRepository authorityRepository;
-    private final UserConnectionRepository userConnectionRepository;
+
+    @Autowired
+    //private final UserRepository userRepository;
+    private UserRepository userRepository;
+
+    @Autowired
+    // private final AuthorityRepository authorityRepository;
+    private AuthorityRepository authorityRepository;
+
+    @Autowired
+    //private final UserConnectionRepository userConnectionRepository;
+    private UserConnectionRepository userConnectionRepository;
 
     @PersistenceContext
     private EntityManager em;
 
+    /*
     @Autowired
     public UserServiceImpl(UserRepository userRepository, AuthorityRepository authorityRepository,
                            UserConnectionRepository userConnectionRepository) {
@@ -46,6 +56,7 @@ public class UserServiceImpl implements UserService {
         this.authorityRepository = authorityRepository;
         this.userConnectionRepository = userConnectionRepository;
     }
+    */
 
     @Transactional(readOnly = true)
     public Optional<User> getUserById(long id) {

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.core.io.ClassPathResource;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -24,12 +26,21 @@ public final class DefaultProfileUtil {
 
     private static final String SPRING_PROFILE_ACTIVE = "spring.profiles.active";
 
-    private static final Properties BUILD_PROPERTIES = readProperties();
 
     /**
      * Get a default profile from <code>application.yml</code>.
      */
-    public static String getDefaultActiveProfiles() {
+    public static String getDefaultActiveProfiles(String propertyLocation) {
+
+        final Properties BUILD_PROPERTIES;
+
+        // check if yml or classic properties file
+        if (propertyLocation.endsWith (".yml")){
+            BUILD_PROPERTIES = readYamlProperties(propertyLocation);
+        } else {
+            BUILD_PROPERTIES = readProperties(propertyLocation);
+        }
+
         if (BUILD_PROPERTIES != null) {
             String activeProfile = BUILD_PROPERTIES.getProperty(SPRING_PROFILE_ACTIVE);
             if (activeProfile != null && !activeProfile.isEmpty() &&
@@ -45,28 +56,48 @@ public final class DefaultProfileUtil {
     /**
      * Set a default to use when no profile is configured.
      */
-    public static void addDefaultProfile(SpringApplication app) {
+    public static void addDefaultProfile(SpringApplication app, String propertyLocation) {
         Map<String, Object> defProperties = new HashMap<>();
         /*
         * The default profile to use when no other profiles are defined
         * This cannot be set in the <code>application.yml</code> file.
         * See https://github.com/spring-projects/spring-boot/issues/1219
         */
-        defProperties.put(SPRING_PROFILE_ACTIVE, getDefaultActiveProfiles());
+        defProperties.put(SPRING_PROFILE_ACTIVE, getDefaultActiveProfiles(propertyLocation));
         app.setDefaultProperties(defProperties);
     }
 
     /**
      * Load application.yml from classpath.
      */
-    private static Properties readProperties() {
+    private static Properties readYamlProperties(String propertyLocation) {
         try {
             YamlPropertiesFactoryBean factory = new YamlPropertiesFactoryBean();
-            factory.setResources(new ClassPathResource("config/application.yml"));
+            factory.setResources(new ClassPathResource(propertyLocation));
             return factory.getObject();
         } catch (Exception e) {
-            log.error("Failed to read application.yml to get default profile");
+            log.error("Failed to read {} to get default profile", propertyLocation);
         }
         return null;
     }
+
+    /**
+     * Load application.properties from classpath.
+     */
+    private static Properties readProperties(String propertyLocation) {
+
+        Properties prop = new Properties();
+        InputStream input = null;
+        try {
+            // loading resource using getResourceAsStream() method
+            input = DefaultProfileUtil.class.getResourceAsStream(propertyLocation);
+            //load a properties file from class path, inside static method
+            prop.load(input);
+            return prop;
+        } catch (Exception e) {
+            log.error("Failed to read {} to get default profile", propertyLocation);
+        }
+        return null;
+    }
+
 }

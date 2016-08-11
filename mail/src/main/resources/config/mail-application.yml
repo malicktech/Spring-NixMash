@@ -1,6 +1,39 @@
+server:
+    port: 9000
 
+spring:
+    profiles:
+        active: mysql
+    mvc:
+        favicon.enabled: false
 
+    # E-MAIL
+    #mail:
+        #properties:
+            #mail.smtp.ssl.enable = false
 
+    # VELOCITY TEMPLATES
+    velocity:
+        check-template-location: false # Check that the templates location exists
+        resource-loader-path: classpath:/velocity/ # Template path.
+
+# ===================================================================
+# NixMash specific properties
+# ===================================================================
+mintster:
+    nixmash:
+        spring.mail.version: v3.0.0
+
+# PROPERTIES USED IN MAIL SERVICE
+mintster.spring.social.application.url: Mail Module
+nixmashmail:
+    contact:
+        subject: New Contact Email from {0}
+        greeting: Hi Poppa Bear, you have a new Contact Message!
+        site:
+            name: NixMash Spring
+        body:
+            type: HTML
 
 
 

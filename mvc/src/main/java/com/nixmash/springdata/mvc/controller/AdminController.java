@@ -40,6 +40,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RequestMapping(value = "/admin")
 public class AdminController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+
     // region View Constants
 
     private static final String PARAMETER_USER_ID = "id";
@@ -66,20 +68,18 @@ public class AdminController {
 
     // endregion
 
-    private final SiteService siteService;
-    private final UserService userService;
-    private final WebUI webUI;
-    private final SiteOptions siteOptions;
+    @Autowired
+    private SiteService siteService;
 
     @Autowired
-    public AdminController(UserService userService, WebUI webUI, SiteOptions siteOptions, SiteService siteService) {
-        this.userService = userService;
-        this.webUI = webUI;
-        this.siteOptions = siteOptions;
-        this.siteService = siteService;
-    }
+    private UserService userService;
 
-    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+    @Autowired
+    private WebUI webUI;
+
+    @Autowired
+    private SiteOptions siteOptions;
+
 
     // region Main Pages
 

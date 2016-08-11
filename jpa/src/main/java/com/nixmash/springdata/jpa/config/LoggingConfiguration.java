@@ -29,7 +29,7 @@ public class LoggingConfiguration {
     private String serverPort;
 
     @Inject
-    private NixmashProperties nixmashProperties;
+    private NixmashJpaProperties nixmashProperties;
 
     @PostConstruct
     private void init() {
@@ -46,6 +46,9 @@ public class LoggingConfiguration {
         logstashAppender.setContext(context);
 
         String customFields = "{\"app_name\":\"" + appName + "\",\"app_port\":\"" + serverPort + "\"}";
+
+
+        System.out.println("Malick JPA LoggingConfiguration: " + nixmashProperties.getLogging().getLogstash().getHost()); // TODO delete
 
         // Set the Logstash appender config from JHipster properties
         logstashAppender.setSyslogHost(nixmashProperties.getLogging().getLogstash().getHost());

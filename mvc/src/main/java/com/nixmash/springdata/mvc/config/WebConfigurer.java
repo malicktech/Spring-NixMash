@@ -46,10 +46,12 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         }
         EnumSet<DispatcherType> disps = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.ASYNC);
         initMetrics(servletContext, disps);
-        if (env.acceptsProfiles(DataConfigProfile.SPRING_PROFILE_PRODUCTION)) {
-            // TODO - to check
-            // initCachingHttpHeadersFilter(servletContext, disps);
+        // TODO - to check
+        /*
+        if (env.acceptsProfiles(DataConfigProfile.SPRING_PROFILE_PRODUCTION))
+            initCachingHttpHeadersFilter(servletContext, disps);
         }
+        */
         if (env.acceptsProfiles(DataConfigProfile.SPRING_PROFILE_DEVELOPMENT)) {
             initH2Console(servletContext);
         }

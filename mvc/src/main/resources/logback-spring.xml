@@ -10,17 +10,20 @@
     <!-- To enable JMX Management -->
     <jmxConfigurator/>
 
+    <!--définir le format de sortie des logs-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%.-1level|JPA|%-30.30logger{0}|%msg%n</pattern>
         </encoder>
     </appender>
 
-    <!-- <logger name="com.nixmash.springdata" level="info"/> -->
+    <logger name="com.nixmash.springdata" level="info"/>
+
     <logger name="com.nixmash.springdata.mvc" level="info" />
     <logger name="com.nixmash.springdata.jsoup" level="info" />
     <logger name="com.nixmash.springdata.jpa" level="info" />
     <logger name="com.nixmash.springdata.solr" level="info" />
+    <logger name="com.nixmash.springdata.mail" level="info" />
 
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>
@@ -46,7 +49,7 @@
     <logger name="org.springframework.security" level="WARN"/>
     <logger name="org.springframework.cache" level="WARN"/>
 
-    <logger name="org.thymeleaf" level="off"/>
+    <logger name="org.thymeleaf" level="info"/>
     <logger name="org.hibernate" level="off"/>
 
 
@@ -54,10 +57,9 @@
         <resetJUL>true</resetJUL>
     </contextListener>
 
+    <!--permet de définir le niveau globale des logs de l'application et de référencer les différents appenders-->
     <root level="#logback.loglevel#">
         <!-- For Console Log -->
         <appender-ref ref="CONSOLE"/>
-        <!-- For File Log -->
-        <!--<appender-ref ref="FILE"/>-->
     </root>
 </configuration>

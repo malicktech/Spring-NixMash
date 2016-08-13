@@ -22,6 +22,14 @@ management:
         mail:
             enabled: false # Enable Mail health check : When using the MailService, configure an SMTP server and set this to true
 
+# LOG
+
+#MessageSource
+message:
+    source:
+        basename: messages
+        use.code.as.default.message: true
+
 
 # Spring AUTOCONFIG
 spring:

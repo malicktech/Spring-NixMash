@@ -24,8 +24,8 @@ import java.util.List;
 //@EnableAutoConfiguration // already present in mvc:Application.java
 public class WebConfig extends WebMvcAutoConfigurationAdapter {
 
-	//private static final String MESSAGESOURCE_BASENAME = "message.source.basename";
-	//private static final String MESSAGESOURCE_USE_CODE_AS_DEFAULT_MESSAGE = "message.source.use.code.as.default.message";
+	private static final String MESSAGESOURCE_BASENAME = "message.source.basename";
+	private static final String MESSAGESOURCE_USE_CODE_AS_DEFAULT_MESSAGE = "message.source.use.code.as.default.message";
 
 	@Autowired
 	private Environment environment;
@@ -43,7 +43,7 @@ public class WebConfig extends WebMvcAutoConfigurationAdapter {
 		super.configureMessageConverters(converters);
 	}
 
-    /*
+
 	@Bean
 	public MessageSource messageSource() {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
@@ -52,23 +52,22 @@ public class WebConfig extends WebMvcAutoConfigurationAdapter {
 				Boolean.parseBoolean(environment.getRequiredProperty(MESSAGESOURCE_USE_CODE_AS_DEFAULT_MESSAGE)));
 		return messageSource;
 	}
-	*/
 
-    /*
+
+
 	@Bean(name = "validator")
-	public LocalValidatorFactoryBean validator(MessageSource messageSource) {
+	public LocalValidatorFactoryBean validator() {
 		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
-		bean.setValidationMessageSource(messageSource);
+		bean.setValidationMessageSource(messageSource());
 		return bean;
 	}
-	*/
 
-	/*
+
+
 	@Override
 	public Validator getValidator() {
-
 	    return validator();
 	}
-	*/
+
 
 }

@@ -17,17 +17,17 @@ server:
 
 # MANAGEMENT HTTP SERVER
 management:
-    context-path: /management # Management endpoint context-path. For instance `/actuator`
+    #context-path: /management # Management endpoint context-path. For instance `/actuator`
     health:
         mail:
             enabled: false # Enable Mail health check : When using the MailService, configure an SMTP server and set this to true
 
 # LOG
 
-#MessageSource
+# INTERNATIONALIZATION - MessageSource
 message:
     source:
-        basename: messages
+        basename: i18n/messages
         use.code.as.default.message: true
 
 
@@ -42,10 +42,9 @@ spring:
         active: #spring.profiles.active#
 
 
-    # INTERNATIONALIZATION
-    messages:
-        basename: i18n/messages # Comma-separated list of basenames, each following the ResourceBundle convention.
-        # use.code.as.default.message: true
+    # INTERNATIONALIZATION - TODO check messageSource properties above ?
+    #messages:
+        # basename: i18n/messages # Comma-separated list of basenames, each following the ResourceBundle convention.
 
     # SPRING MVC
     mvc:

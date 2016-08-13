@@ -1,24 +1,15 @@
-<configuration>
-	<statusListener class="ch.qos.logback.core.status.NopStatusListener" />
-	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
-		<resetJUL>true</resetJUL>
-	</contextListener>
+<?xml version="1.0" encoding="UTF-8"?>
 
-	<!-- To enable JMX Management -->
-	<jmxConfigurator />
+<configuration scan="true">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
-			<pattern>%.-1level|TEST|%-30.30logger{0}|%msg%n</pattern>
-		</encoder>
-	</appender>
+	<logger name="com.nixmash.springdata" level="DEBUG" />
 
-	<logger name="com.nixmash.springdata" level="OFF" />
-	<logger name="org.thymeleaf" level="OFF" />
-	<logger name="org.hibernate" level="OFF" />
-	<logger name="org.springframework" level="OFF" />
+    <logger name="org.hibernate.ejb.HibernatePersistenceProvider" level="OFF"/>
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
 
-	<root level="OFF">
-		<appender-ref ref="console" />
-	</root>
+    <root level="WARN">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
 </configuration>

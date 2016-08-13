@@ -65,7 +65,7 @@ public class Application {
         SpringApplication app = new SpringApplication(Application.class);
         DefaultProfileUtil.addDefaultProfile(app, "config/application.yml");
         Environment env = app.run(args).getEnvironment();
-        log.warn("\n----------------------------------------------------------\n\t" +
+        log.info("\n----------------------------------------------------------\n\t" +
                 "Application '{}' is running! Access URLs:\n\t" +
                 "Local: \t\thttp://127.0.0.1:{}\n\t" +
                 "External: \thttp://{}:{}\n----------------------------------------------------------",

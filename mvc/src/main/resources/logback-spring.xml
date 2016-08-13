@@ -17,13 +17,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.nixmash.springdata" level="info"/>
-
-    <logger name="com.nixmash.springdata.mvc" level="info" />
-    <logger name="com.nixmash.springdata.jsoup" level="info" />
-    <logger name="com.nixmash.springdata.jpa" level="info" />
-    <logger name="com.nixmash.springdata.solr" level="info" />
-    <logger name="com.nixmash.springdata.mail" level="info" />
+    <logger name="com.nixmash.springdata" level="#logback.loglevel#"/>
 
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>

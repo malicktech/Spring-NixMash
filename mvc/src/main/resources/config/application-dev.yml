@@ -10,10 +10,9 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
-
 spring:
     profiles:
-        include: h2 # automatically set the 'h2' profile
+        include: mysql # automatically set the given profile
     devtools:
         restart:
             enabled: false
@@ -23,6 +22,38 @@ spring:
             cache-seconds: 1
     thymeleaf:
             cache: false
+
+
+# ===================================================================
+# LOGGING
+# ===================================================================
+
+logging:
+    #file: logs/dev_app.log
+    pattern:
+        console: "%d %.-5level|JPA|%-30.30logger{0}|%msg%n" # date , Level en 5 lettre max, classe du log , message
+        #file: "%d %-5level [%thread] %logger : %msg%n"
+    level:
+        ROOT: WARN
+        com.nixmash.springdata: INFO
+        org.springframework: WARN
+        org.springframework.web: WARN
+        org.springframework.security: WARN
+        org.springframework.cache: WARN
+        javax.activation: WARN
+        javax.mail: WARN
+        javax.xml.bind : WARN
+        ch.qos.logback : WARN
+        com.codahale.metrics : WARN
+        com.ryantenney : WARN
+        com.zaxxer : WARN  # <!--HicariCP Pool log-->
+        net.sf.ehcache : WARN
+        org.apache : WARN
+        org.apache.catalina.startup.DigesterFactory : OFF
+        org.hibernate : WARN
+        org.hibernate.validator : WARN
+        org.hibernate.ejb.HibernatePersistenceProvider : OFF
+        org.thymeleaf: WARN
 
 # ===================================================================
 # NixMash specific properties

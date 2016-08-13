@@ -17,8 +17,11 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.List;
+import java.util.Locale;
 
 @Configuration
 //@EnableAutoConfiguration // already present in mvc:Application.java
@@ -43,6 +46,16 @@ public class WebConfig extends WebMvcAutoConfigurationAdapter {
 		super.configureMessageConverters(converters);
 	}
 
+    /**
+     * Locale Resolver to Set default Locale as FRench
+     * @return
+     */
+    @Bean(name = "localeResolver")
+    public LocaleResolver localeResolver() {
+        SessionLocaleResolver resolver = new SessionLocaleResolver();
+        resolver.setDefaultLocale(Locale.FRENCH);
+        return resolver;
+    }
 
 	@Bean
 	public MessageSource messageSource() {

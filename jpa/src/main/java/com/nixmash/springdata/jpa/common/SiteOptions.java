@@ -15,7 +15,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 @Component
-@DependsOn("databasePopulator")
+// @DependsOn("databasePopulator")
 public class SiteOptions {
 
     @Autowired

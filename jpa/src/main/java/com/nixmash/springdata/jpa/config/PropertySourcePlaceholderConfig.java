@@ -38,21 +38,18 @@ public class PropertySourcePlaceholderConfig extends PropertySourcePlaceholderAb
     @Bean
     @Profile(DataConfigProfile.SPRING_PROFILE_DEVELOPMENT)
     public static PropertySourcesPlaceholderConfigurer devProperties() {
-        System.out.println("Malick - Create Property source DEV");
         return createPropertySourcesPlaceholderConfigurer("config/jpa-application-dev.properties");
     }
 
     @Bean
     @Profile(DataConfigProfile.SPRING_PROFILE_H2)
     public static PropertySourcesPlaceholderConfigurer databaseH2Properties() {
-        System.out.println("Malick - Create Property source H2");
         return createPropertySourcesPlaceholderConfigurer("config/jpa-application-h2.properties");
     }
 
     @Bean
     @Profile(DataConfigProfile.SPRING_PROFILE_MYSQL)
     public static PropertySourcesPlaceholderConfigurer databaseMysqlProperties() {
-        System.out.println("Malick - Create Property source MYSQL");
         return createPropertySourcesPlaceholderConfigurer("config/jpa-application-mysql.properties");
     }
 

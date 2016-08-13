@@ -134,9 +134,10 @@ allprojects {
 
         compile ("org.springframework:spring-context-support")
 
+        compile "org.springframework.boot:spring-boot-starter-aop"
+
         // starter logging is bring by starter-web
         // compile "org.springframework.boot:spring-boot-starter-logging"
-        compile "org.springframework.boot:spring-boot-starter-aop"
 
         // Spring
         // contains : spring-boot-starter-jdbc + spring-data-jpa + hibernate-core + hibernate-entitymanager + javax.transaction-api + spring-aspects
@@ -177,7 +178,7 @@ allprojects {
 
         // https://github.com/spring-projects/spring-boot/blob/master/spring-boot-starters/spring-boot-starter-test/pom.xml
         //Starter for testing Spring Boot applications with libraries including JUnit, Hamcrest and Mockito
-		// provides : Junit + spring Test + AssertJ + Hamcrest + Mocito + JsonAssert + JsonPath (jayway) 
+		// provides : Junit + spring Test + AssertJ + Hamcrest + Mocito + JsonAssert + JsonPath (jayway)
 		testCompile 'org.springframework.boot:spring-boot-starter-test'
 
         /* TODO : to delete

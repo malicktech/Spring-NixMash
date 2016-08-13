@@ -24,16 +24,6 @@ configurations {
     compile.exclude module: 'org.slf4j'
 }
 
-/*
-bootRepackage {
-}
-*/
-
-springBoot {
-    mainClass = 'com.nixmash.springdata.jpa.JpaLauncher'
-    executable = true
-}
-
 dependencies {
     compile 'com.github.slugify:slugify:2.1.5'
 	compile("org.springframework.boot:spring-boot-starter-social-twitter")
@@ -57,6 +47,16 @@ bootRun {
     addResources = false
     systemProperty 'spring.profiles.active', 'dev'
     main = 'com.nixmash.springdata.jpa.JpaLauncher'
+}
+
+/*
+bootRepackage {
+}
+*/
+
+springBoot {
+        mainClass = 'com.nixmash.springdata.jpa.JpaLauncher'
+        executable = true
 }
 
 /*

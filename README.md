@@ -1,9 +1,9 @@
 NB
 ==========================
 
-`The base of project is Forked from [github.com/mintster/spring-data](https://github.com/mintster/spring-data)
+`The base of project is Forked from [github.com/mintster/spring-data](https://github.com/mintster/spring-data)`
 
-`I changed many things to improved it and improve my knowledge on spring technologies.
+`I changed many things to improved it and improve my knowledge on spring technologies`
 
 NixMash Spring
 ==========================

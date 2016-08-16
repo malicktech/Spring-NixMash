@@ -1,3 +1,10 @@
+NB
+==========================
+
+`The base of project is Forked from [github.com/mintster/spring-data](https://github.com/mintster/spring-data)
+
+`I changed many things to improved it and improve my knowledge on spring technologies.
+
 NixMash Spring
 ==========================
 
@@ -5,15 +12,7 @@ NixMash Spring is a Web Bootstrap 3 application demonstrating Spring and support
 
 *Spring Boot, Spring Data JPA, Spring Solr, Spring Web MVC, Spring Security, Spring Social, Hibernate, Mockito, Json, Gradle, Spring Mail, Jsoup, Multi-Profile Configurations, JPA Auditing, Webjars, Dandelion, Velocity Templating, @PreAuthorize Method Security, REST Templates, RSS View Resolver, Custom Validators, @Controller Advice, Custom Exception Handling, Tagging with Typeahead, Bootstrap3, Site Administration Dashboard and Thymeleaf*
 
-The slogan on the [NixMash Spring Demo Site](http://nixmashspring.daveburkevt.com/) is "Becoming Spring Masters Together" which is what drives development in this app.
 
-Nearly every new application feature has one or more blog posts at [NixMash.com](http://nixmash.com) explaining the feature in detail. All NixMash Spring blog posts are listed below with their implementation version.
-
-See the [Installation](#installation) section below on how to configure application settings to run the NixMash Spring Web App. Once configured you can run the Web Application with
-
-`$ gradle mvc:bootRun`
-
-The supporting projects (JPA, Mail, Solr and Jsoup) can also be executed with `$ gradle bootRun`.
 
 A working demo of the site is online at **http://nixmashspring.daveburkevt.com.**
 
